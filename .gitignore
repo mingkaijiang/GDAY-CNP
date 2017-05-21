@@ -31,3 +31,16 @@ vignettes/*.pdf
 # Temporary files created by R markdown
 *.utf8.md
 *.knit.md
+.Rproj.user
+
+# All csv files
+met_data/*.csv
+met_data/raw_met_data/*.csv
+outputs/withoutP/*.csv
+outputs/withP/*.csv
+
+# All nc files
+met_data/raw_met_data/*.nc
+met_data/raw_met_data/*.dat
+# all DS_Store files
+*.DS_Store
