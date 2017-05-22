@@ -31,7 +31,7 @@ class CreateMetData(object):
                        
         self.ovar_names = ['#year', 'doy', 'tair', 'rain', 'tsoil',
                            'tam', 'tpm', 'tmin', 'tmax', 'tday', 'vpd_am',
-                           'vpd_pm', 'co2', 'ndep', 'nfix', 'wind', 'pres',
+                           'vpd_pm', 'co2', 'ndep', 'nfix', 'pdep', 'wind', 'pres',
                            'wind_am', 'wind_pm', 'par_am', 'par_pm']
                            
         self.ounits = ['#--', '--', 'degC', 'mm/d', 'degC','degC', 'degC',
@@ -54,24 +54,26 @@ class CreateMetData(object):
         self.UMOL_TO_J = 1.0 / self.J_TO_UMOL
 
     def write_spinup_file(self, df, yr_sequence, ofname=None, vary_co2=False,
-                          co2=None, vary_ndep=False, ndep=None, nfix=None):
+                          co2=None, vary_ndep=False, ndep=None, nfix=None, 
+                          vary_pdep=False, pdep=None):
 
         start_sim = yr_sequence[0]
         end_sim = yr_sequence[-1]
         year = str(start_sim)
         (ofp, wr) = self.write_hdr(yr_sequence, ofname, spinup=True)
         self.write_data(df, yr_sequence, ofp, wr, ofname, vary_co2, co2,
-                        vary_ndep, ndep, nfix)
+                        vary_ndep, ndep, nfix, vary_pdep, pdep)
 
     def write_daily_met_file(self, df, yr_sequence, ofname=None, vary_co2=False,
-                             co2=None, vary_ndep=False, ndep=None, nfix=None):
+                             co2=None, vary_ndep=False, ndep=None, nfix=None,
+                             vary_pdep=False, pdep=None):
 
         start_sim = yr_sequence[0]
         end_sim = yr_sequence[-1]
         year = str(start_sim)
         (ofp, wr) = self.write_hdr(yr_sequence, ofname, spinup=False)
         self.write_data(df, yr_sequence, ofp, wr, ofname, vary_co2, co2,
-                        vary_ndep, ndep, nfix)
+                        vary_ndep, ndep, nfix, vary_pdep=False, pdep=None)
 
     def write_hdr(self, yr_sequence, ofname, spinup=True):
         start_sim = yr_sequence[0]
@@ -98,7 +100,7 @@ class CreateMetData(object):
         return (ofp, wr)
 
     def write_data(self, df, yr_sequence, ofp, wr, ofname, vary_co2, co2,
-                   vary_ndep, ndep_data, nfix):
+                   vary_ndep, ndep_data, nfix, vary_pdep, pdep_data):
 
         # use running mean - slow!!
         # or use day average
@@ -226,9 +228,14 @@ class CreateMetData(object):
                     ndep = ndep_data[i]
                 else:
                     ndep = ndep_data
+                    
+                if vary_pdep:
+                    pdep = pdep_data[i]
+                else:
+                    pdep = pdep_data
 
                 wr.writerow([yr, doy, tair, rain, tsoil, tam, tpm, tmin, tmax,\
-                             tday, vpd_am, vpd_pm, co2, ndep, nfix, wind, \
+                             tday, vpd_am, vpd_pm, co2, ndep, nfix, pdep, wind, \
                              press, wind_am, wind_pm, par_am, par_pm])
 
                 cnt += 1
@@ -409,6 +416,8 @@ if __name__ == "__main__":
     nfix = (bn1 * (et * MM_2_CM) + bn2) * KG_HA_2_G_M2
     nfix *= G_M2_to_TONNES_HA / YR_TO_DAY
     
+    pdep = 0.0
+
     #==========================
     # Generate Equilibrium FILE
     #==========================
@@ -425,7 +434,7 @@ if __name__ == "__main__":
                                              preserve_leap=False)
 
     C.write_spinup_file(df_met_varA, yr_sequence, ofname=ofname, vary_co2=False,
-                        co2=co2, vary_ndep=False, ndep=ndep, nfix=nfix)
+                        co2=co2, vary_ndep=False, ndep=ndep, nfix=nfix, pdep=pdep)
 
 
     #================================================================
@@ -450,7 +459,7 @@ if __name__ == "__main__":
     ofname = "%s_met_data_industrial_to_present_1750_%d.csv" % (site, end)
     C.write_spinup_file(df_met_varA, yr_sequence, ofname=ofname, vary_co2=True,
                         co2=co2_data, vary_ndep=True, ndep=ndep_data,
-                        nfix=nfix)
+                        nfix=nfix, pdep=pdep)
 
     #=============================================
     # make the experimental run daily driving file -AMB/ELE, var/avg
@@ -460,16 +469,16 @@ if __name__ == "__main__":
 
     ofname = "%s_met_data_amb_avg_co2.csv" % (site)
     C.write_daily_met_file(df_met_avgA, exp_years, ofname=ofname, vary_co2=True,
-                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix)
+                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix, pdep=pdep)
 
     ofname = "%s_met_data_amb_var_co2.csv" % (site)
     C.write_daily_met_file(df_met_varA, exp_years, ofname=ofname, vary_co2=True,
-                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix)
+                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix, pdep=pdep)
 
     ofname = "%s_met_data_ele_avg_co2.csv" % (site)
     C.write_daily_met_file(df_met_avgE, exp_years, ofname=ofname, vary_co2=True,
-                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix)
+                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix, pdep=pdep)
 
     ofname = "%s_met_data_ele_var_co2.csv" % (site)
     C.write_daily_met_file(df_met_varE, exp_years, ofname=ofname, vary_co2=True,
-                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix)
+                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix, pdep=pdep)
