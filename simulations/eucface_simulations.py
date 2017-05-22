@@ -11,7 +11,7 @@ import sys
 import subprocess
 
 USER = os.getlogin()
-sys.path.append('/Users/%s/Documents/Research/Projects/eucface/step_change/scripts' % (USER))
+sys.path.append('/Users/%s/Documents/Research/Projects/eucface/Git/scripts' % (USER))
 import adjust_gday_param_file as ad
 
 __author__  = "Martin De Kauwe"

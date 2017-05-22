@@ -14,7 +14,7 @@ import sys
 import subprocess
 
 USER = os.getlogin()
-sys.path.append('/Users/%s/Documents/Research/Projects/eucface/step_change/scripts' % (USER))
+sys.path.append('/Users/%s/Documents/Research/Projects/eucface/Git/scripts' % (USER))
 import adjust_gday_param_file as ad
 
 
@@ -29,7 +29,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
 
     # dir names
     base_param_name = "base_start_with_P"
-    base_param_dir = "/Users/%s/Documents/Research/Projects/eucface/stemp_change/example/params" % (USER)
+    base_param_dir = "/Users/%s/Documents/Research/Projects/eucface/Git/GDAY/params" % (USER)
     base_dir = os.path.dirname(os.getcwd())
     param_dir = os.path.join(base_dir, "params")
     met_dir = os.path.join(base_dir, "met_data")
@@ -116,6 +116,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "structsurfp": "0.00004",
 
                         # parameters
+                        "resp_coeff": "0.2",      
                         "alpha_j": "0.308",  # Taking the theoretical maximum (from Belinda) 0.385 x 0.8 (leaf absorptance) = 0.308
                         "intercep_frac": "0.15",
                         "max_intercep_lai": "3.0",
@@ -269,7 +270,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "model_optroot": "false",
                         "modeljm": "1",
                         "ncycle": "true",
-                        "pcycle": "true",
+                        "pcycle": "false",
                         "nuptake_model": "2",
                         "puptake_model": "2",
                         "triose_p": "false",
