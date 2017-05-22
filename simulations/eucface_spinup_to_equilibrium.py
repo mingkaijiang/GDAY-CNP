@@ -138,7 +138,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "fretrans": "0.5",
                         "rretrans": "0.0",
                         "bretrans": "0.0",
-                        "wretrans": "0.0",
+                        "wretrans": "0.7",
                         "cretrans": "0.0",
                         "crit_n_cost_of_p": "15.0",
                         "ncwnewz": "0.003",          #New stem ring N:C at zero leaf N:C (mobile)
@@ -270,7 +270,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "model_optroot": "false",
                         "modeljm": "1",
                         "ncycle": "true",
-                        "pcycle": "false",
+                        "pcycle": "true",
                         "nuptake_model": "2",
                         "puptake_model": "2",
                         "triose_p": "false",
