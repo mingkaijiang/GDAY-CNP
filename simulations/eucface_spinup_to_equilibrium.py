@@ -29,7 +29,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
 
     # dir names
     base_param_name = "base_start_with_P"
-    base_param_dir = "/Users/%s/Documents/Git/GDAY/example/params" % (USER)
+    base_param_dir = "/Users/%s/Documents/Research/Projects/eucface/stemp_change/example/params" % (USER)
     base_dir = os.path.dirname(os.getcwd())
     param_dir = os.path.join(base_dir, "params")
     met_dir = os.path.join(base_dir, "met_data")

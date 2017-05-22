@@ -42,5 +42,9 @@ outputs/withP/*.csv
 # All nc files
 met_data/raw_met_data/*.nc
 met_data/raw_met_data/*.dat
+
 # all DS_Store files
 *.DS_Store
+
+# all object file
+GDAY/src/*.o
