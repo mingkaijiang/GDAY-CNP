@@ -379,27 +379,12 @@ if __name__ == "__main__":
     met_dir = "raw_met_data"
     C = CreateMetData(site, soilT=False)
 
-    exp_years = np.arange(2012, 2024)
+    exp_years = np.arange(1992, 2011)
 
-    met_fname = "EucFACE_forcing_2012-2023_AMBAVG.csv"
-    df_met_avgA = pd.read_csv(os.path.join(met_dir, met_fname), sep=",")
-    df_met_avgA = rename_colnames(df_met_avgA, frame_type="met")
-
-    met_fname = "EucFACE_forcing_2012-2023_AMBVAR.csv"
+    met_fname = "EucFACE_forcing_1992-2011.csv"
     df_met_varA = pd.read_csv(os.path.join(met_dir, met_fname), sep=",")
     df_met_varA = rename_colnames(df_met_varA, frame_type="met")
 
-    met_fname = "EucFACE_forcing_2012-2023_ELEAVG.csv"
-    df_met_avgE = pd.read_csv(os.path.join(met_dir, met_fname), sep=",")
-    df_met_avgE = rename_colnames(df_met_avgE, frame_type="met")
-
-    met_fname = "EucFACE_forcing_2012-2023_ELEVAR.csv"
-    df_met_varE = pd.read_csv(os.path.join(met_dir, met_fname), sep=",")
-    df_met_varE = rename_colnames(df_met_varE, frame_type="met")
-
-    ndep_fname = "EucFACE_forcing_daily_CO2NDEP_1750-2023.dat"
-    df_ndep = pd.read_csv(os.path.join(met_dir, ndep_fname), sep=" ")
-    df_ndep = rename_colnames(df_ndep, frame_type="ndep")
 
     # Following Cleveland et al. (1999) we calculate BNF as a function of ET
     # Similarly to Smith et al. (2014; LPJ-GUESS) and Wieder et al (2015; CLM)
@@ -418,67 +403,24 @@ if __name__ == "__main__":
     
     pdep = 0.0
 
+    # 2.25 kg N hectare-1 year-1 -> t/ha/day
+    ndep = 0.00225 / YR_TO_DAY
+    
+    
     #==========================
     # Generate Equilibrium FILE
     #==========================
-    ofname = "%s_met_data_equilibrium_50_yrs.csv" % (site)
-
-    # 2.25 kg N hectare-1 year-1 -> t/ha/day
-    ndep = 0.00225 / YR_TO_DAY
-    co2 = 276.84
-
-    start_yr = exp_years[0]
-    end_yr = exp_years[-1]
-    num_yrs = 50
-    yr_sequence = C.get_random_year_sequence(start_yr, end_yr, num_yrs,
-                                             preserve_leap=False)
-
-    C.write_spinup_file(df_met_varA, yr_sequence, ofname=ofname, vary_co2=False,
-                        co2=co2, vary_ndep=False, ndep=ndep, nfix=nfix, pdep=pdep)
-
-
-    #================================================================
-    # Make a forcing file from 1750 years with increasing co2/ndep
-    #================================================================
-    start = 1750
-    end = 2011
-    num_yrs = (end - start) + 1 # 1750-year before experiment
-
-    co2_ndep_data = df_ndep[(df_ndep.YEAR >= start) &
-                            (df_ndep.YEAR <= end)]
-    co2_data = co2_ndep_data.aCO2.values
-    ndep_data = co2_ndep_data.ndep.values * KG_2_TONNES / YR_TO_DAY
-
-    # Need the start and end years that we actually have to build the sequence
-    start_yr = exp_years[0]
-    end_yr = exp_years[-1]
-
-    yr_sequence = C.get_random_year_sequence(start, end, num_yrs,
-                                             preserve_leap=False)
-
-    ofname = "%s_met_data_industrial_to_present_1750_%d.csv" % (site, end)
-    C.write_spinup_file(df_met_varA, yr_sequence, ofname=ofname, vary_co2=True,
-                        co2=co2_data, vary_ndep=True, ndep=ndep_data,
-                        nfix=nfix, pdep=pdep)
-
-    #=============================================
-    # make the experimental run daily driving file -AMB/ELE, var/avg
-    #=============================================
-    exp_ndep = df_ndep[(df_ndep.YEAR >= start_yr) & (df_ndep.YEAR <= end_yr)]
-    ndep_data = exp_ndep.ndep.values * KG_2_TONNES / YR_TO_DAY
-
-    ofname = "%s_met_data_amb_avg_co2.csv" % (site)
-    C.write_daily_met_file(df_met_avgA, exp_years, ofname=ofname, vary_co2=True,
-                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix, pdep=pdep)
+    co2 = 400.0
 
     ofname = "%s_met_data_amb_var_co2.csv" % (site)
     C.write_daily_met_file(df_met_varA, exp_years, ofname=ofname, vary_co2=True,
-                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix, pdep=pdep)
+                           co2=co2, vary_ndep=False, ndep=ndep, nfix=nfix, pdep=pdep)
 
-    ofname = "%s_met_data_ele_avg_co2.csv" % (site)
-    C.write_daily_met_file(df_met_avgE, exp_years, ofname=ofname, vary_co2=True,
-                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix, pdep=pdep)
+    #==========================
+    # Generate Elevated CO2 FILE
+    #==========================
+    co2 = 550.0
 
     ofname = "%s_met_data_ele_var_co2.csv" % (site)
-    C.write_daily_met_file(df_met_varE, exp_years, ofname=ofname, vary_co2=True,
-                           co2=None, vary_ndep=True, ndep=ndep_data, nfix=nfix, pdep=pdep)
+    C.write_daily_met_file(df_met_varA, exp_years, ofname=ofname, vary_co2=False,
+                           co2=co2, vary_ndep=False, ndep=ndep, nfix=nfix, pdep=pdep)

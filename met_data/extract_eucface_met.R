@@ -2,6 +2,10 @@
 # Download met data from HIEv and process them
 # extraction code provided by Jim Yang
 
+
+
+#### Incomplete!!!!!!
+
 ######################################################################################
 ### packages
 if(!dir.exists("download"))dir.create("download")
