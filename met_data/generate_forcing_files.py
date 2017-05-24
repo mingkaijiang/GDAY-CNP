@@ -406,6 +406,11 @@ if __name__ == "__main__":
     # 2.25 kg N hectare-1 year-1 -> t/ha/day
     ndep = 0.00225 / YR_TO_DAY
     
+    start_yr = exp_years[0]
+    end_yr = exp_years[-1]
+    num_yrs = 50
+    yr_sequence = C.get_random_year_sequence(start_yr, end_yr, num_yrs,
+                                             preserve_leap=False)
     
     #==========================
     # Generate Equilibrium FILE
@@ -413,7 +418,7 @@ if __name__ == "__main__":
     co2 = 400.0
 
     ofname = "%s_met_data_amb_var_co2.csv" % (site)
-    C.write_daily_met_file(df_met_varA, exp_years, ofname=ofname, vary_co2=True,
+    C.write_daily_met_file(df_met_varA, yr_sequence, ofname=ofname, vary_co2=True,
                            co2=co2, vary_ndep=False, ndep=ndep, nfix=nfix, pdep=pdep)
 
     #==========================
@@ -422,5 +427,5 @@ if __name__ == "__main__":
     co2 = 550.0
 
     ofname = "%s_met_data_ele_var_co2.csv" % (site)
-    C.write_daily_met_file(df_met_varA, exp_years, ofname=ofname, vary_co2=False,
+    C.write_daily_met_file(df_met_varA, yr_sequence, ofname=ofname, vary_co2=False,
                            co2=co2, vary_ndep=False, ndep=ndep, nfix=nfix, pdep=pdep)

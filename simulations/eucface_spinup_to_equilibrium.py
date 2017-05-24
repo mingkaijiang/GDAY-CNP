@@ -270,7 +270,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "model_optroot": "false",
                         "modeljm": "1",
                         "ncycle": "true",
-                        "pcycle": "true",
+                        "pcycle": "false",
                         "nuptake_model": "2",
                         "puptake_model": "2",
                         "triose_p": "false",
@@ -291,8 +291,6 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
         os.system(GDAY_SPIN + cfg_fname)
 
     if POST_INDUST == True:
-
-        # run for 260 odd years post industrial with increasing co2/ndep
 
         # copy spunup base files to make two new experiment files
         shutil.copy(os.path.join(param_dir, "%s_%s_model_spunup.cfg" % (experiment_id, site)),
