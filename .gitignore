@@ -48,3 +48,10 @@ met_data/raw_met_data/*.dat
 
 # all object file
 GDAY/src/*.o
+
+# token file for downloading data from HIEv
+tokenfile.txt
+
+# download file
+download/*.dat
+download/*.csv
