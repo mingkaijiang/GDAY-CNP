@@ -299,7 +299,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
         mtag = "%s_met_data_amb_var_co2.csv" % (site)
-        out_fn = itag + "_indust.out"
+        out_fn = itag + "_equilib.csv"
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
         met_fname = os.path.join(met_dir, mtag)
@@ -313,7 +313,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                          "out_fname": "%s" % (out_fname),
      
                          # control
-                         # "print_options": "daily",
+                         "print_options": "daily",
                         }
         ad.adjust_param_file(cfg_fname, replace_dict)
         os.system(GDAY + cfg_fname)
