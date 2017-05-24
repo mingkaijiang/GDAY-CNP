@@ -46,7 +46,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
         # effectively zero
         itag = "%s_%s_model_spinup" % (experiment_id, site)
         otag = "%s_%s_model_spunup" % (experiment_id, site)
-        mtag = "%s_met_data_equilibrium_50_yrs.csv" % (site)
+        mtag = "%s_met_data_amb_var_co2.csv" % (site)
         out_fn = itag + "_equilib.out"
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -300,7 +300,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
 
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
-        mtag = "%s_met_data_industrial_to_present_1750_2011.csv" % (site)
+        mtag = "%s_met_data_amb_var_co2.csv" % (site)
         out_fn = itag + "_indust.out"
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")

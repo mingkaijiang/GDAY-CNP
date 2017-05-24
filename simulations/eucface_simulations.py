@@ -69,10 +69,4 @@ if __name__ == "__main__":
     experiment_id = "FACE"
     site = "EUC"
 
-    # Ambient
-    main(experiment_id, site, treatment="amb", exp="avg")
-    main(experiment_id, site, treatment="amb", exp="var")
-
-    # Elevated
-    main(experiment_id, site, treatment="ele", exp="avg")
     main(experiment_id, site, treatment="ele", exp="var")
