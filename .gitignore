@@ -57,3 +57,6 @@ tokenfile.txt
 # download file
 download/*.dat
 download/*.csv
+
+# cfg file
+params/*.cfg
