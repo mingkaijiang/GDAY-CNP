@@ -71,8 +71,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "cstore": "0.0",
                         "nstore": "0.0",
                         "pstore": "0.0",
-                        "inorgn": "0.00004",
-                        "inorglabp": "0.00004",
+                        "inorgn": "0.0000",     # 0.00004
+                        "inorglabp": "0.0000",  # 0.00004
                         "inorgsorbp": "0.0",
                         "inorgssorbp": "0.0",
                         "inorgoccp": "0.0",
@@ -165,7 +165,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "watdecaywet": "0.1",
                         "ligshoot": "0.18", # Based on white et al. 2000 #"0.145",   # assuming leaf and root same as DE word document
                         "ligroot": "0.22",  # Based on white et al. 2000    # assuming leaf and root same as DE word document
-                        "rateuptake": "3.0",
+                        "rateuptake": "1.0",
                         "rateloss": "0.3",  # was 0.1
                         "topsoil_depth": "450.0",    # Not needed as I have supplied the root zone water and topsoil water available
                         "rooting_depth": "2000.0",   # Not needed as I have supplied the root zone water and topsoil water available
@@ -180,7 +180,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "soil_order": "andisol",
                         "ks": "0.5",
                         "kp": "0.3",
-                         "krp": "0.00001",
+                        "krp": "0.00001",
                         #"dz0v_dh": "0.1",
                         #"z0h_z0m": "1.0",
                         #"displace_ratio": "0.67",
@@ -189,7 +189,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "displace_ratio": "0.75",  # From Jones, pg 67, following Jarvis et al. 1976
                         "z0h_z0m": "1.0",
 
-                        "g1": "3.8667",     # Fit by Me to Teresa's data 7th Nov 2013
+                        "g1": "3.8667",     # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
                         "jmaxna": "31.5",   # "jmaxna": "133.35",  # at 22 deg c
                         "jmaxpa": "400.99",   
                         "jmaxnb": "0.0",      # "jmaxnb": "0.0",     # at 22 deg c
@@ -215,46 +215,46 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "nf_crit": "0.015",
                         "sapturnover": "0.1",
                         "p_atm_deposition": "0.00085",   # 1/4 of value from Table 4, Olander et al. 2005; Earth Interactions.
-                         "p_rate_par_weather": "0.0001", # Calcualted so that weathering rate = atm deposition;
-                         "passpcmin": "0.005",
-                         "passpcmax": "0.05",
-                         "psecmnp": "0.000022",
-                         "pcbnew": "0.000015",
-                         "pcbnewz": "0.000015",
-                         "pccnew": "0.000015",
-                         "pccnewz": "0.000015",
-                         "pcmaxfold": "0.0015",    # 0.0015 Table 3, Olander et al. 2005, Earth Interactions.
-                         "pcmaxfyoung": "0.0015",
-                         "pcmaxr": "0.004",
-                         "pcrfac": "0.8",
-                         "pcwimm": "0.0003",
-                         "pcwimmz": "0.0003",
-                         "pcwnew": "0.0003",
-                         "pcwnewz": "0.0003",
-                         "pf_crit": "0.002",
-                         "pf_min": "0.0002",
-                         "phmax": "7.6",
-                         "phmin": "5.0",
-                         "phtextmin": "0.000008",
-                         "phtextmax": "0.00015",
-                         "phtextslope": "0.00004",
-                         "pmax": "0.002",
-                         "pmin": "0.01",
-                         "pmin0": "0.0",
-                         "pmincrit": "2.0",
-                         "prateloss": "1.0",
-                         "prateuptake": "100.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
-                         "slowpcmin": "0.005",
-                         "slowpcmax": "0.011111",
-                         "soilph": "4.5",          # Olander et al., 2005, Earth Interactions.
-                         "sorpmx": "5.0",
-                         "sorpaf": "1.0",
-                         "structcp": "5500.0",
-                         "structratp": "0.0",
+                        "p_rate_par_weather": "0.0001", # Calcualted so that weathering rate = atm deposition;
+                        "passpcmin": "0.005",
+                        "passpcmax": "0.05",
+                        "psecmnp": "0.000022",
+                        "pcbnew": "0.000015",
+                        "pcbnewz": "0.000015",
+                        "pccnew": "0.000015",
+                        "pccnewz": "0.000015",
+                        "pcmaxfold": "0.0015",    # 0.0015 Table 3, Olander et al. 2005, Earth Interactions.
+                        "pcmaxfyoung": "0.0015",
+                        "pcmaxr": "0.004",
+                        "pcrfac": "0.8",
+                        "pcwimm": "0.0003",
+                        "pcwimmz": "0.0003",
+                        "pcwnew": "0.0003",
+                        "pcwnewz": "0.0003",
+                        "pf_crit": "0.002",
+                        "pf_min": "0.0002",
+                        "phmax": "7.6",
+                        "phmin": "5.0",
+                        "phtextmin": "0.000008",
+                        "phtextmax": "0.00015",
+                        "phtextslope": "0.00004",
+                        "pmax": "0.002",
+                        "pmin": "0.01",
+                        "pmin0": "0.0",
+                        "pmincrit": "2.0",
+                        "prateloss": "1.0",
+                        "prateuptake": "1.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
+                        "slowpcmin": "0.005",
+                        "slowpcmax": "0.011111",
+                        "soilph": "4.5",          # Olander et al., 2005, Earth Interactions.
+                        "sorpmx": "5.0",
+                        "sorpaf": "1.0",
+                        "structcp": "5500.0",
+                        "structratp": "0.0",
 
                         # control
                         "adjust_rtslow": "false",  # priming, off
-                        "alloc_model": "allometric",
+                        "alloc_model": "fixed",
                         "assim_model": "mate",
                         "calc_sw_params": "true",   #false=use fwp values, true=derive them
                         "deciduous_model": "false",
@@ -269,7 +269,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "model_optroot": "false",
                         "modeljm": "1",
                         "ncycle": "true",
-                        "pcycle": "false",
+                        "pcycle": "true",
                         "nuptake_model": "2",
                         "puptake_model": "2",
                         "triose_p": "false",
@@ -324,4 +324,4 @@ if __name__ == "__main__":
     experiment_id = "FACE"
     site = "EUC"
     treatment = "ele"
-    main(experiment_id, site, SPIN_UP=True, POST_INDUST=True)
+    main(experiment_id, site, SPIN_UP=True, POST_INDUST=False)

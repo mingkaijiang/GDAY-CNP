@@ -60,3 +60,6 @@ download/*.csv
 
 # cfg file
 params/*.cfg
+
+# simulations
+simulations/*.txt
