@@ -966,7 +966,7 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
 
     *vcmax = arrh(mt, vcmax25, p->eav, Tk);
 
-    fprintf(stderr, "jmax25n %f, jmax25p %f, vcmax25n %f, vcmax25p %f, N0 %f, P0 %f\n", jmax25n, jmax25p, vcmax25n, vcmax25p, N0, P0);
+    //fprintf(stderr, "jmax25n %f, jmax25p %f, vcmax25n %f, vcmax25p %f, N0 %f, P0 %f\n", jmax25n, jmax25p, vcmax25n, vcmax25p, N0, P0);
 
   } else if (c->modeljm == 2) {
     vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;

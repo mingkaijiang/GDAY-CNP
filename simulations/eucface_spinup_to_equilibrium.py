@@ -126,15 +126,16 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "sla": "4.37",   # 43.7 +/-  1.5 cm2 g 1 dry mass
                         "slazero": "4.37",   # 43.7+/-  1.5 cm2 g 1 dry mass
                         "lai_closed": "0.5",  # I am effectively turning this feature off by setting it so low
-                        "c_alloc_fmax": "0.35",
-                        "c_alloc_fmin": "0.15",
-                        "c_alloc_rmax": "0.35",
-                        "c_alloc_rmin": "0.05",
-                        "c_alloc_bmax": "0.1",
-                        "c_alloc_bmin": "0.1",
+                        "c_alloc_fmax": "0.31",  # 0.35
+                        "c_alloc_fmin": "0.31",  # 0.15
+                        "c_alloc_rmax": "0.37",  # 0.35
+                        "c_alloc_rmin": "0.37",  # 0.05
+                        "c_alloc_bmax": "0.05",   # 0.1
+                        "c_alloc_bmin": "0.05",   # 0.1
                         "c_alloc_cmax": "0.0", # turn off coarse roots!
                         "biochemical_p_constant": "150.0",
                         "fretrans": "0.5",
+                        "fretransp": "0.5",
                         "rretrans": "0.0",
                         "bretrans": "0.0",
                         "wretrans": "0.7",
@@ -149,11 +150,11 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "nccnewz": "0.003",          #new coarse root N C at zero leaf N C
                         "nccnew": "0.003",           #new coarse root N C at critical leaf N C
                         "ncrfac": "0.8",
-                        "ncmaxfyoung": "0.04",
-                        "ncmaxfold": "0.04",
+                        "ncmaxfyoung": "0.1",
+                        "ncmaxfold": "0.1",
                         "ncmaxr": "0.03",
                         "retransmob": "0.0",
-                        "fdecay": "0.6",   # 18 mth turnover * 1/30
+                        "fdecay": "0.6",    # 18 mth turnover * 1/30
                         "fdecaydry": "0.6", # 18 mth turnover * 1/30
                         "max_p_biochemical": "0.001",
                         "rdecay": "0.6",
@@ -165,10 +166,10 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "watdecaywet": "0.1",
                         "ligshoot": "0.18", # Based on white et al. 2000 #"0.145",   # assuming leaf and root same as DE word document
                         "ligroot": "0.22",  # Based on white et al. 2000    # assuming leaf and root same as DE word document
-                        "rateuptake": "1.0",
-                        "rateloss": "0.3",  # was 0.1
+                        "rateuptake": "2.0",
+                        "rateloss": "0.05",  # was 0.1
                         "topsoil_depth": "450.0",    # Not needed as I have supplied the root zone water and topsoil water available
-                        "rooting_depth": "2000.0",   # Not needed as I have supplied the root zone water and topsoil water available
+                        "rooting_depth": "2500.0",   # Not needed as I have supplied the root zone water and topsoil water available
                         "wcapac_root": "300.0",      # [mm] (FC-WP)*rooting_depth. But using 2.0 m, site_description_stuff/EucFACE_Plot_Summary.doc
                         "wcapac_topsoil": "67.5",    # [mm] (FC-WP)*rooting_depth. But using 0.45 m, site_description_stuff/EucFACE_Plot_Summary.doc
                         "ctheta_topsoil": "0.65",     # Derive based on soil type loamy_sand
@@ -189,15 +190,15 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "displace_ratio": "0.75",  # From Jones, pg 67, following Jarvis et al. 1976
                         "z0h_z0m": "1.0",
 
-                        "g1": "3.8667",     # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
-                        "jmaxna": "31.5",   # "jmaxna": "133.35",  # at 22 deg c
-                        "jmaxpa": "400.99",   
-                        "jmaxnb": "0.0",      # "jmaxnb": "0.0",     # at 22 deg c
-                        "jmaxpb": "88.56",      
-                        "vcmaxna": "15.6",   # "vcmaxna": "66.04",  # at 22 deg c
-                        "vcmaxpa": "3.54",   
+                        "g1": "3.8667",       # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
+                        "jmaxna": "31.5",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
+                        "jmaxpa": "188.76",   # 400.99
+                        "jmaxnb": "0.0",      # at 22 deg c
+                        "jmaxpb": "0.4144",   # 88.56  
+                        "vcmaxna": "66.04",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
+                        "vcmaxpa": "3.54",    # 3.54
                         "vcmaxnb": "0.0",     # "vcmaxnb": "0.0",    # at 22 deg c
-                        "vcmaxpb": "27.66",     
+                        "vcmaxpb": "27.66",     # 27.66
                         "measurement_temp": "22.0", # parameters obtained at 22 not 25 degrees
                         "heighto": "4.826",
                         "htpower": "0.35",
@@ -223,8 +224,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "pcbnewz": "0.000015",
                         "pccnew": "0.000015",
                         "pccnewz": "0.000015",
-                        "pcmaxfold": "0.0015",    # 0.0015 Table 3, Olander et al. 2005, Earth Interactions.
-                        "pcmaxfyoung": "0.0015",
+                        "pcmaxfold": "0.01",    # 0.0015 Table 3, Olander et al. 2005, Earth Interactions.
+                        "pcmaxfyoung": "0.01",
                         "pcmaxr": "0.004",
                         "pcrfac": "0.8",
                         "pcwimm": "0.0003",
@@ -242,8 +243,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "pmin": "0.01",
                         "pmin0": "0.0",
                         "pmincrit": "2.0",
-                        "prateloss": "1.0",
-                        "prateuptake": "1.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
+                        "prateloss": "0.05",
+                        "prateuptake": "2.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
                         "slowpcmin": "0.005",
                         "slowpcmax": "0.011111",
                         "soilph": "4.5",          # Olander et al., 2005, Earth Interactions.
@@ -270,8 +271,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "modeljm": "1",
                         "ncycle": "true",
                         "pcycle": "true",
-                        "nuptake_model": "2",
-                        "puptake_model": "2",
+                        "nuptake_model": "1",
+                        "puptake_model": "1",
                         "triose_p": "false",
                         "output_ascii": "true",
                         "passiveconst": "false",
