@@ -401,7 +401,7 @@ if __name__ == "__main__":
     nfix = (bn1 * (et * MM_2_CM) + bn2) * KG_HA_2_G_M2
     nfix *= G_M2_to_TONNES_HA / YR_TO_DAY
     
-    pdep = 0.00000049
+    pdep = 0.0000093
 
     # 2.25 kg N hectare-1 year-1 -> t/ha/day
     ndep = 0.00225 / YR_TO_DAY

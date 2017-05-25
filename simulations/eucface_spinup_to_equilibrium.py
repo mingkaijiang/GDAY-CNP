@@ -166,7 +166,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "watdecaywet": "0.1",
                         "ligshoot": "0.18", # Based on white et al. 2000 #"0.145",   # assuming leaf and root same as DE word document
                         "ligroot": "0.22",  # Based on white et al. 2000    # assuming leaf and root same as DE word document
-                        "rateuptake": "2.0",
+                        "rateuptake": "1.5",
                         "rateloss": "0.05",  # was 0.1
                         "topsoil_depth": "450.0",    # Not needed as I have supplied the root zone water and topsoil water available
                         "rooting_depth": "2500.0",   # Not needed as I have supplied the root zone water and topsoil water available
@@ -192,11 +192,11 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
 
                         "g1": "3.8667",       # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
                         "jmaxna": "31.5",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
-                        "jmaxpa": "188.76",   # 400.99
+                        "jmaxpa": "400.9",   # 400.99
                         "jmaxnb": "0.0",      # at 22 deg c
-                        "jmaxpb": "0.4144",   # 88.56  
-                        "vcmaxna": "66.04",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
-                        "vcmaxpa": "3.54",    # 3.54
+                        "jmaxpb": "88.56",      # 88.56  
+                        "vcmaxna": "15.6",    # 15.6 "vcmaxna": "66.04",  # at 22 deg c
+                        "vcmaxpa": "3.54",    
                         "vcmaxnb": "0.0",     # "vcmaxnb": "0.0",    # at 22 deg c
                         "vcmaxpb": "27.66",     # 27.66
                         "measurement_temp": "22.0", # parameters obtained at 22 not 25 degrees
@@ -244,7 +244,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "pmin0": "0.0",
                         "pmincrit": "2.0",
                         "prateloss": "0.05",
-                        "prateuptake": "2.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
+                        "prateuptake": "20.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
                         "slowpcmin": "0.005",
                         "slowpcmax": "0.011111",
                         "soilph": "4.5",          # Olander et al., 2005, Earth Interactions.
