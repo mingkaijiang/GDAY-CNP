@@ -576,8 +576,8 @@ void spin_up_pools(canopy_wk *cw, control *c, fluxes *f, met_arrays *ma, met *m,
       185-205, specifically page 196.
     */
     double tol_c = 5E-03;
-    double tol_n = 5E-04;
-    double tol_p = 5E-05;
+    double tol_n = 5E-03;
+    double tol_p = 5E-03;
     double prev_plantc = 99999.9;
     double prev_soilc = 99999.9;
     double prev_plantn = 99999.9;

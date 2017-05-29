@@ -858,6 +858,7 @@ void calculate_jmax_and_vcmax(control *c, params *p, state *s, double Tk,
     */
     double jmax25, vcmax25;
     double conv;
+    double log_jmax, log_vcmax;
 
     *vcmax = 0.0;
     *jmax = 0.0;
@@ -866,17 +867,23 @@ void calculate_jmax_and_vcmax(control *c, params *p, state *s, double Tk,
         *jmax = p->jmax;
         *vcmax = p->vcmax;
     } else if (c->modeljm == 1) {
-        /* the maximum rate of electron transport at 25 degC */
-        jmax25 = p->jmaxna * N0 + p->jmaxnb;
+//        /* the maximum rate of electron transport at 25 degC */
+//        jmax25 = p->jmaxna * N0 + p->jmaxnb;
+//
+//        /* this response is well-behaved for TLEAF < 0.0 */
+//        *jmax = peaked_arrh(mt, jmax25, p->eaj, Tk,
+//                            p->delsj, p->edj);
+//
+//        /* the maximum rate of electron transport at 25 degC */
+//        vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;
+//
+//        *vcmax = arrh(mt, vcmax25, p->eav, Tk);
 
-        /* this response is well-behaved for TLEAF < 0.0 */
-        *jmax = peaked_arrh(mt, jmax25, p->eaj, Tk,
-                            p->delsj, p->edj);
-
-        /* the maximum rate of electron transport at 25 degC */
-        vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;
-
-        *vcmax = arrh(mt, vcmax25, p->eav, Tk);
+        log_vcmax = 1.993 + 2.555 * log(N0) - 0.372 * log(p->sla) + 0.422 * log(N0) * log(p->sla);
+        *vcmax = exp(log_vcmax);
+        
+        log_jmax = 1.197 + 0.847 * log_vcmax;
+        *jmax = exp(log_jmax);
 
     } else if (c->modeljm == 2) {
         vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;
