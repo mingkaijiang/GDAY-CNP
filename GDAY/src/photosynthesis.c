@@ -582,6 +582,8 @@ void mate_C3_photosynthesis(control *c, fluxes *f, met *m, params *p, state *s,
     }
 
     s->vcmax = (vcmax_am + vcmax_pm) / 2.0;
+    
+    //fprintf(stderr, "jmax %f vcmax %f\n", jmax_am, vcmax_am);
 
     ci_am = calculate_ci(c, p, s, m->vpd_am, m->Ca);
     ci_pm = calculate_ci(c, p, s, m->vpd_pm, m->Ca);
@@ -936,6 +938,7 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
   double jmax25, vcmax25;
   double jmax25p, jmax25n;
   double vcmax25p, vcmax25n;
+  double log_jmax, log_vcmax;
 
   *vcmax = 0.0;
   *jmax = 0.0;
@@ -944,29 +947,33 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
     *jmax = p->jmax;
     *vcmax = p->vcmax;
   } else if (c->modeljm == 1) {
-    /* the maximum rate of electron transport at 25 degC */
-    jmax25n = p->jmaxna * N0 + p->jmaxnb;
+//    /* the maximum rate of electron transport at 25 degC */
+//    jmax25n = p->jmaxna * N0 + p->jmaxnb;
+//
+//    /* P limitation on jmax */
+//    jmax25p = p->jmaxpa * P0 + p->jmaxpb;
+//
+//    jmax25 = MIN(jmax25n, jmax25p);
+//
+//    /* this response is well-behaved for TLEAF < 0.0 */
+//    *jmax = peaked_arrh(mt, jmax25, p->eaj, Tk,
+//                        p->delsj, p->edj);
+//
+//    /* the maximum rate of electron transport at 25 degC */
+//    vcmax25n = p->vcmaxna * N0 + p->vcmaxnb;
+//
+//    /* P limitation on jmax */
+//    vcmax25p = p->vcmaxpa * P0 + p->vcmaxpb;
+//
+//    vcmax25 = MIN(vcmax25n, vcmax25p);
+//
+//    *vcmax = arrh(mt, vcmax25, p->eav, Tk);
 
-    /* P limitation on jmax */
-    jmax25p = p->jmaxpa * P0 + p->jmaxpb;
-
-    jmax25 = MIN(jmax25n, jmax25p);
-
-    /* this response is well-behaved for TLEAF < 0.0 */
-    *jmax = peaked_arrh(mt, jmax25, p->eaj, Tk,
-                        p->delsj, p->edj);
-
-    /* the maximum rate of electron transport at 25 degC */
-    vcmax25n = p->vcmaxna * N0 + p->vcmaxnb;
-
-    /* P limitation on jmax */
-    vcmax25p = p->vcmaxpa * P0 + p->vcmaxpb;
-
-    vcmax25 = MIN(vcmax25n, vcmax25p);
-
-    *vcmax = arrh(mt, vcmax25, p->eav, Tk);
-
-    //fprintf(stderr, "jmax25n %f, jmax25p %f, vcmax25n %f, vcmax25p %f, N0 %f, P0 %f\n", jmax25n, jmax25p, vcmax25n, vcmax25p, N0, P0);
+    log_vcmax = 3.946 + 0.921 * log(N0) + 0.121 * log(P0) + 0.282 * log(N0) * log(P0);
+    *vcmax = exp(log_vcmax);
+    
+    log_jmax = 1.246 + 0.886 * log_vcmax + 0.089 * log(P0);
+    *jmax = exp(log_jmax);
 
   } else if (c->modeljm == 2) {
     vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;
