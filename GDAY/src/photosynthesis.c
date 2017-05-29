@@ -617,23 +617,18 @@ void mate_C3_photosynthesis(control *c, fluxes *f, met *m, params *p, state *s,
         asat_am = MIN(aj_am, ac_am);
         asat_pm = MIN(aj_pm, ac_pm);
     }
-
-    // fprintf(stderr, "ac_pm %f\n", ac_pm);
-    // fprintf(stderr, "aj_pm %f\n", aj_pm);
-    // fprintf(stderr, "ap_pm %f\n", ap_pm);
-    // fprintf(stderr, "asat_pm %f\n", asat_pm);
-
+    
     /* Covert PAR units (umol PAR MJ-1) */
     conv = MJ_TO_J * J_2_UMOL;
     m->par *= conv;
-
+    
     /* LUE (umol C umol-1 PAR) ; note conversion in epsilon */
     lue_am = epsilon(p, asat_am, m->par, alpha_am, daylen);
     lue_pm = epsilon(p, asat_pm, m->par, alpha_pm, daylen);
 
     /* use average to simulate canopy photosynthesis */
     lue_avg = (lue_am + lue_pm) / 2.0;
-
+    
     /* absorbed photosynthetically active radiation (umol m-2 s-1) */
     if (float_eq(s->lai, 0.0))
         f->apar = 0.0;

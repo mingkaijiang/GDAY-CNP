@@ -270,7 +270,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "model_optroot": "false",
                         "modeljm": "1",
                         "ncycle": "true",
-                        "pcycle": "false",
+                        "pcycle": "true",
                         "nuptake_model": "1",
                         "puptake_model": "1",
                         "triose_p": "false",
