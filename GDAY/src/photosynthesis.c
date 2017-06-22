@@ -875,10 +875,15 @@ void calculate_jmax_and_vcmax(control *c, params *p, state *s, double Tk,
 //        *vcmax = arrh(mt, vcmax25, p->eav, Tk);
 
         log_vcmax = 1.993 + 2.555 * log(N0) - 0.372 * log(p->sla) + 0.422 * log(N0) * log(p->sla);
-        *vcmax = exp(log_vcmax);
+        vcmax25 = exp(log_vcmax);
+        
+        *vcmax = arrh(mt, vcmax25, p->eav, Tk);
         
         log_jmax = 1.197 + 0.847 * log_vcmax;
-        *jmax = exp(log_jmax);
+        jmax25 = exp(log_jmax);
+        
+        *jmax = peaked_arrh(mt, jmax25, p->eaj, Tk,
+                            p->delsj, p->edj);
 
     } else if (c->modeljm == 2) {
         vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;
