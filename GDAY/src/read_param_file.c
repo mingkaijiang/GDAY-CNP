@@ -460,6 +460,17 @@ int handler(char *section, char *name, char *value, control *c,
         else {
             c->water_balance = BUCKET;
         }
+    } else if (MATCH("control", "aci_relationship")) {
+        if (strcmp(temp, "WALKER") == 0||
+            strcmp(temp, "walker") == 0)
+            c->aci_relationship = WALKER;
+        else if (strcmp(temp, "ELLSWORTH") == 0||
+                 strcmp(temp, "ellsworth") == 0)
+            c->aci_relationship = ELLSWORTH;
+        else {
+            fprintf(stderr, "Unknown A-Ci relationship: %s\n", temp);
+            exit(EXIT_FAILURE);
+        }
     } else if (MATCH("control", "water_stress")) {
         if (strcmp(temp, "False") == 0 ||
             strcmp(temp, "FALSE") == 0 ||

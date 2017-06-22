@@ -28,6 +28,7 @@ typedef struct {
     int   fixleafpc;
     int   grazing;
     int   gs_model;
+    int   aci_relationship;
     int   model_optroot;
     int   modeljm;
     int   ncycle;

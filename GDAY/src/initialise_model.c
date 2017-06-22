@@ -49,6 +49,7 @@ void initialise_control(control *c) {
     c->use_eff_nc = 0;              /* use constant leaf n:c for  metfrac s */
     c->water_stress = TRUE;         /* water stress modifier turned on=TRUE (default)...ability to turn off to test things without drought stress = FALSE */
     c->water_balance = 0;            /* Water calculations: 0=simple 2 layered bucket; 1=SPA-style hydraulics */
+    c->aci_relationship = WALKER;   /* Controlling for the relationship between jmax and leaf N/P, and vcmax and leaf N/P, based on either Walker 2014 global synthesis or Ellsworth 2015 EucFACE data */
     c->spin_up = FALSE;             /* Spin up to a steady state? If False it just runs the model */
 
     /* Internal calculated */

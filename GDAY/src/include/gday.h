@@ -35,6 +35,10 @@
 #define MATE 0
 #define BEWDY 1
 
+/* A Ci relationship */
+#define WALKER 0
+#define ELLSWORTH 1
+
 /* Respiration models */
 #define FIXED 0
 #define VARY 1

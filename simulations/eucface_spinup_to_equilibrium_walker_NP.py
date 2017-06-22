@@ -267,6 +267,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "fixleafpc": "false",
                         "grazing": "false",
                         "gs_model": "medlyn",
+                        "aci_relationship": "walker",
                         "model_optroot": "false",
                         "modeljm": "1",
                         "ncycle": "true",
