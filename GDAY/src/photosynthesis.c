@@ -971,11 +971,25 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
 //
 //    *vcmax = arrh(mt, vcmax25, p->eav, Tk);
 
+    // Walker et al. 2014 global synthesis relationship
+    /* the maximum rate of electron transport at 25 degC */
     log_vcmax = 3.946 + 0.921 * log(N0) + 0.121 * log(P0) + 0.282 * log(N0) * log(P0);
-    *vcmax = exp(log_vcmax);
+    vcmax25 = exp(log_vcmax);
     
+    /* the maximum rate of electron transport at 25 degC */
     log_jmax = 1.246 + 0.886 * log_vcmax + 0.089 * log(P0);
-    *jmax = exp(log_jmax);
+    jmax25 = exp(log_jmax);
+    
+    // Ellsworth et al. 2015 PCE EucFACE relationship with TPU 
+    
+    // Ellsworth et al. 2015 PCE EucFACE relationship without TPU
+    
+    /* Temperature-dependent relationship ,
+    this response is well-behaved for TLEAF < 0.0 */
+    *jmax = peaked_arrh(mt, jmax25, p->eaj, Tk,
+                        p->delsj, p->edj);
+    
+    *vcmax = arrh(mt, vcmax25, p->eav, Tk);
 
   } else if (c->modeljm == 2) {
     vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;
