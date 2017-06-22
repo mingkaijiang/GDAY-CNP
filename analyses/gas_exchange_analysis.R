@@ -61,16 +61,33 @@ allDF2 <- allDF[allDF$Species %in% myDF$Species, ]
 #### Convert N and P into the correct unit
 #### Current in %
 #### Convert into mass/area then molarea
-# unit: g / area ( I think area is cm2)
+# unit: g / area ( I think area is m2)
 allDF2$Narea <- allDF2$X.N/100 * allDF2$LMA
 allDF2$Parea <- allDF2$X.P/100 * allDF2$LMA
 
-# unit: Nmolarea = mmol / area ( I think area is cm2)
+# unit: Nmolarea = mmol / area ( I think area is m2)
 allDF2$Nmolarea <- allDF2$Narea/14/0.001
 allDF2$Pmolarea <- allDF2$Parea/31/0.001
 
-allDF2$N_g_m2 <- allDF2$Narea / 10.0
-allDF2$P_g_m2 <- allDF2$Parea / 10.0
+allDF2$N_g_m2 <- allDF2$Narea
+allDF2$P_g_m2 <- allDF2$Parea
+
+allDF2$LMA_g_m2 <- allDF2$LMA
+
+#### Linear model for N and P only relationships
+### Step 1: N only relationship
+lm1 <- with(allDF2, lm(Vcmax25~N_g_m2+LMA_g_m2))
+summary(lm1)
+
+lm2 <- with(allDF2, lm(Vcmax25~P_g_m2))
+summary(lm2)
+
+lm3 <- with(allDF2, lm(Jmax25~N_g_m2+LMA_g_m2))
+summary(lm3)
+
+lm4 <- with(allDF2, lm(Jmax25~P_g_m2))
+summary(lm4)
+
 
 #### Mixed effect linear model step by step
 ### Step 1: linear model

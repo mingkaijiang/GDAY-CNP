@@ -995,15 +995,19 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
         jmax25 = exp(log_jmax);
         
     } else if (c->aci_relationship == ELLSWORTH) {
-        // Ellsworth et al. 2015 PCE EucFACE relationship with TPU 
-        jmax25n = p->jmaxna * N0 + p->jmaxnb;
+        // Ellsworth et al. 2015 PCE EucFACE relationship without TPU limitation
+        jmax25n = -0.2834 * (10000.0/(p->sla*10.0)) + p->jmaxna * N0 + p->jmaxnb;
         jmax25p = p->jmaxpa * P0 + p->jmaxpb;
         jmax25 = MIN(jmax25n, jmax25p);
         
-        vcmax25n = p->vcmaxna * N0 + p->vcmaxnb;
+        vcmax25n = -0.13097 * (10000.0/(p->sla*10.0)) + p->vcmaxna * N0 + p->vcmaxnb;
         vcmax25p = p->vcmaxpa * P0 + p->vcmaxpb;
         vcmax25 = MIN(vcmax25n, vcmax25p);
-        // Ellsworth et al. 2015 PCE EucFACE relationship without TPU
+        
+        fprintf(stderr, "N0 %f, P0 %f, jmax25n %f, jmax25p %f, vcmax25n %f, vcmax25p %f\n",
+                N0, P0, jmax25n, jmax25p, vcmax25n, vcmax25p);
+        
+        // Ellsworth et al. 2015 PCE EucFACE relationship with TPU limitation
     }
 
 

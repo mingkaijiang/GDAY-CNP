@@ -150,8 +150,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "nccnewz": "0.003",          #new coarse root N C at zero leaf N C
                         "nccnew": "0.003",           #new coarse root N C at critical leaf N C
                         "ncrfac": "0.8",
-                        "ncmaxfyoung": "0.1",
-                        "ncmaxfold": "0.1",
+                        "ncmaxfyoung": "0.04",
+                        "ncmaxfold": "0.04",
                         "ncmaxr": "0.03",
                         "retransmob": "0.0",
                         "fdecay": "0.6",    # 18 mth turnover * 1/30
@@ -166,7 +166,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "watdecaywet": "0.1",
                         "ligshoot": "0.18", # Based on white et al. 2000 #"0.145",   # assuming leaf and root same as DE word document
                         "ligroot": "0.22",  # Based on white et al. 2000    # assuming leaf and root same as DE word document
-                        "rateuptake": "1.0",
+                        "rateuptake": "0.5",
                         "rateloss": "0.05",  # was 0.1
                         "topsoil_depth": "450.0",    # Not needed as I have supplied the root zone water and topsoil water available
                         "rooting_depth": "2500.0",   # Not needed as I have supplied the root zone water and topsoil water available
@@ -190,15 +190,15 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "displace_ratio": "0.75",  # From Jones, pg 67, following Jarvis et al. 1976
                         "z0h_z0m": "1.0",
 
-                        "g1": "3.8667",       # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
-                        "jmaxna": "236.064",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
-                        "jmaxpa": "2914.305",   # 400.99
+                        "g1": "3.8667",          # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
+                        "jmaxna": "23.6064",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
+                        "jmaxpa": "291.4305",    # 400.99
                         "jmaxnb": "129.785",     # at 22 deg c
-                        "jmaxpb": "99.949",   # 88.56  
-                        "vcmaxna": "104.5338",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
-                        "vcmaxpa": "1531.748",    
+                        "jmaxpb": "99.949",      # 88.56  
+                        "vcmaxna": "10.45338",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
+                        "vcmaxpa": "153.1748",    
                         "vcmaxnb": "74.5224",    # "vcmaxnb": "0.0",    # at 22 deg c
-                        "vcmaxpb": "57.242",  # 27.66
+                        "vcmaxpb": "57.242",     # 27.66
                         "measurement_temp": "22.0", # parameters obtained at 22 not 25 degrees
                         "heighto": "4.826",
                         "htpower": "0.35",
@@ -244,7 +244,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "pmin0": "0.0",
                         "pmincrit": "2.0",
                         "prateloss": "0.05",
-                        "prateuptake": "7.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
+                        "prateuptake": "1.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
                         "slowpcmin": "0.005",
                         "slowpcmax": "0.011111",
                         "soilph": "4.5",          # Olander et al., 2005, Earth Interactions.
@@ -263,8 +263,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "exudation": "false",
                         "fixed_stem_nc": "true",
                         "fixed_stem_pc": "true",
-                        "fixleafnc": "false",
-                        "fixleafpc": "false",
+                        "fixleafnc": "true",
+                        "fixleafpc": "true",
                         "grazing": "false",
                         "gs_model": "medlyn",
                         "aci_relationship": "ellsworth",
