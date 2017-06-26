@@ -71,3 +71,11 @@ with(wk_np_DF1_sub, points(gpp~doy, type='l',col="lightblue"))
 ## We don't have P limitation over time. Need to re-parameterize the model - update CO2 result, fixed using 1998 met data
 ## Update met data so that it reflects Medlyn's paper period (2012-2023) - run using 1998 data both ambCO2 and eleCO2
 ## Plot CO2 effect at annnual timestep  - add new P limitation GDAY result
+
+## To do list:
+# 1. Update met data (fixed 1998 met, variable CO2 for 2012-2023, historic post-industrial transient data)
+# 2. Parameterize so that the site is P-limited
+# 3. Add plot onto Medlyn 2016
+# 4. Generate results for DE
+# 5. Make poster using quasi-equil framework (i.e. re-parameterize the simplfied GDAY)
+# 6. AmazonFACE talk 
