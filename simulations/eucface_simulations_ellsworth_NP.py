@@ -277,7 +277,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "model_optroot": "false",
                         "modeljm": "1",
                         "ncycle": "true",
-                        "pcycle": "false",
+                        "pcycle": "true",
                         "nuptake_model": "1",
                         "puptake_model": "1",
                         "triose_p": "false",
@@ -335,7 +335,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
         mtag = "%s_met_data_amb_var_co2.csv" % (site)
-        out_fn = "%s_amb_equilib.csv" % (site)
+        out_fn = "%s_amb_01_ellsworth_NP.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
         met_fname = os.path.join(met_dir, mtag)
@@ -364,7 +364,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
         itag = "%s_%s_model_indust_adj" % (experiment_id, site)
         otag = "%s_%s_model_ele_initial" % (experiment_id, site)
         mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
-        out_fn = "%s_ele_initial.csv" % (site)
+        out_fn = "%s_ele_02_ellsworth_NP.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
         met_fname = os.path.join(met_dir, mtag)
@@ -422,7 +422,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
         itag = "%s_%s_model_ele_spinup" % (experiment_id, site)
         otag = "%s_%s_model_ele_spunup" % (experiment_id, site)
         mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
-        out_fn = "FACE_EUC_ele_spunup_%s%s.csv" % (site, treatment.upper())
+        out_fn = "%s_ele_03_ellsworth_NP.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
         met_fname = os.path.join(met_dir, mtag)
@@ -451,7 +451,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
         itag = "%s_%s_model_ele_equil" % (experiment_id, site)
         otag = "%s_%s_model_ele_final" % (experiment_id, site)
         mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
-        out_fn = "%s_ele_final_equilib.csv" % (site)
+        out_fn = "%s_ele_03_ellsworth_NP.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
         met_fname = os.path.join(met_dir, mtag)
