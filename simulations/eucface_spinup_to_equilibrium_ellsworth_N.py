@@ -63,11 +63,11 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         # Canopy height = 22 m average of 6 plots at UWS, site_description_stuff/EucFACE_Plot_Summary.doc
                         "activesoil": "0.001",
                         "activesoiln": "0.00004",
-                        "activesoilp": "0.00004",
+                        "activesoilp": "0.000002",
                         "age": "100.0",
                         "branch": "0.001",
                         "branchn": "0.00004",
-                        "branchp": "0.00004",
+                        "branchp": "0.000002",
                         "cstore": "0.0",
                         "nstore": "0.0",
                         "pstore": "0.0",
@@ -85,34 +85,34 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "metabsurfp": "0.0",
                         "passivesoil": "0.001",
                         "passivesoiln": "0.0004",
-                        "passivesoilp": "0.0004",
+                        "passivesoilp": "0.000002",
                         "prev_sma": "1.0",
                         "root": "0.001",
                         "croot": "0.0",   # don't simulate coarse roots
                         "crootn": "0.0",  # don't simulate coarse roots
                         "crootp": "0.0",  # don't simulate coarse roots
                         "rootn": "0.00004",
-                        "rootp": "0.00004",
+                        "rootp": "0.000002",
                         "sapwood": "0.001",
                         "shoot": "0.001",
                         "shootn": "0.00004",
-                        "shootp": "0.00004",
+                        "shootp": "0.000002",
                         "slowsoil": "0.001",
                         "slowsoiln": "0.00004",
-                        "slowsoilp": "0.00004",
+                        "slowsoilp": "0.000002",
                         "stem": "0.001",
                         "stemn": "0.00004",
-                        "stemp": "0.00004",
+                        "stemp": "0.000002",
                         "stemnimm": "0.00004",
-                        "stempimm": "0.00004",
+                        "stempimm": "0.000002",
                         "stemnmob": "0.0",
                         "stempmob": "0.0",
                         "structsoil": "0.001",
                         "structsoiln": "0.00004",
-                        "structsoilp": "0.00004",
+                        "structsoilp": "0.000002",
                         "structsurf": "0.001",
                         "structsurfn": "0.00004",
-                        "structsurfp": "0.00004",
+                        "structsurfp": "0.0000024",
 
                         # parameters
                         "resp_coeff": "0.2",      
@@ -166,8 +166,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "watdecaywet": "0.1",
                         "ligshoot": "0.18",          # Based on white et al. 2000 #"0.145",   # assuming leaf and root same as DE word document
                         "ligroot": "0.22",           # Based on white et al. 2000    # assuming leaf and root same as DE word document
-                        "rateuptake": "1.6",
-                        "rateloss": "0.1",           # was 0.1
+                        "rateuptake": "1.8",
+                        "rateloss": "0.05",           # was 0.1
                         "topsoil_depth": "450.0",    # Not needed as I have supplied the root zone water and topsoil water available
                         "rooting_depth": "2500.0",   # Not needed as I have supplied the root zone water and topsoil water available
                         "wcapac_root": "300.0",      # [mm] (FC-WP)*rooting_depth. But using 2.0 m, site_description_stuff/EucFACE_Plot_Summary.doc
@@ -223,7 +223,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "nf_min": "0.005", 
                         "nf_crit": "0.015",
                         "sapturnover": "0.1",
-                        "p_atm_deposition": "0.00085",   # 1/4 of value from Table 4, Olander et al. 2005; Earth Interactions.
+                        "p_atm_deposition": "0.000086",   # 1/4 of value from Table 4, Olander et al. 2005; Earth Interactions.
                         "p_rate_par_weather": "0.0001", # Calcualted so that weathering rate = atm deposition;
                         "passpcmin": "0.005",
                         "passpcmax": "0.05",
@@ -252,7 +252,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "pmin0": "0.0",
                         "pmincrit": "2.0",
                         "prateloss": "0.05",
-                        "prateuptake": "1.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
+                        "prateuptake": "3.6",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
                         "slowpcmin": "0.005",
                         "slowpcmax": "0.011111",
                         "soilph": "4.5",          # Olander et al., 2005, Earth Interactions.
@@ -270,7 +270,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "disturbance": "false",
                         "exudation": "false",
                         "fixed_stem_nc": "true",
-                        "fixed_stem_pc": "false",
+                        "fixed_stem_pc": "true",
                         "fixleafnc": "false",
                         "fixleafpc": "false",
                         "grazing": "false",

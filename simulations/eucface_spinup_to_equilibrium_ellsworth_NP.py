@@ -166,8 +166,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "watdecaywet": "0.1",
                         "ligshoot": "0.18",          # Based on white et al. 2000 #"0.145",   # assuming leaf and root same as DE word document
                         "ligroot": "0.22",           # Based on white et al. 2000    # assuming leaf and root same as DE word document
-                        "rateuptake": "1.6",
-                        "rateloss": "0.1",           # was 0.1
+                        "rateuptake": "1.8",
+                        "rateloss": "0.05",           # was 0.1
                         "topsoil_depth": "450.0",    # Not needed as I have supplied the root zone water and topsoil water available
                         "rooting_depth": "2500.0",   # Not needed as I have supplied the root zone water and topsoil water available
                         "wcapac_root": "300.0",      # [mm] (FC-WP)*rooting_depth. But using 2.0 m, site_description_stuff/EucFACE_Plot_Summary.doc
