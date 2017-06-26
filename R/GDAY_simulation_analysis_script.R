@@ -69,5 +69,5 @@ with(wk_np_DF1_sub, points(gpp~doy, type='l',col="lightblue"))
 
 
 ## We don't have P limitation over time. Need to re-parameterize the model
-## Update met data so that it reflects Medlyn's paper period (2012-2023)
+## Update met data so that it reflects Medlyn's paper period (2012-2023) - run using 1998 data
 ## Plot CO2 effect at annnual timestep
