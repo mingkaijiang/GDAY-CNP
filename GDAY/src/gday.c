@@ -415,7 +415,7 @@ void run_sim(canopy_wk *cw, control *c, fluxes *f, met_arrays *ma, met *m,
 
 
             if (! c->sub_daily) {
-                unpack_met_data(c, f, ma, m, dummy, s->day_length[doy]);
+                unpack_met_data(c, f, ma, m, p, dummy, s->day_length[doy]);
             }
             calculate_litterfall(c, f, p, s, doy, &fdecay, &rdecay);
 
@@ -627,13 +627,13 @@ void spin_up_pools(canopy_wk *cw, control *c, fluxes *f, met_arrays *ma, met *m,
             if (c->pcycle) {
                 /* Have we reached a steady state? */
                 fprintf(stderr,
-                        "Spinup: Leaf C - %f, Leaf CN - %f, Leaf CP - %f, Wood C - %f, Soil N - %f, Soil P - %f, LAI - %f\n",
-                        s->shoot, s->shoot/s->shootn, s->shoot/s->shootp, s->stem, s->soiln, s->soilp, s->lai);
+                        "Spinup: Leaf C - %f, Leaf CN - %f, Leaf CP - %f, Wood C - %f, Leaf N - %f, Leaf P - %f, Soil P - %f, LAI - %f\n",
+                        s->shoot, s->shoot/s->shootn, s->shoot/s->shootp, s->stem, s->shootn, s->shootp, s->soilp, s->lai);
             } else {
               /* Have we reached a steady state? */
               fprintf(stderr,
-                      "Spinup: Leaf C - %f, Leaf CN - %f, Wood CN - %f, Wood C - %f, Soil N - %f, LAI - %f\n",
-                      s->shoot, s->shoot/s->shootn, s->stem/s->stemn, s->stem, s->soiln, s->lai);
+                      "Spinup: Leaf C - %f, Leaf CN - %f, Wood CN - %f, Wood C - %f, Leaf P - %f, LAI - %f\n",
+                      s->shoot, s->shoot/s->shootn, s->stem/s->stemn, s->stem, s->shootp, s->lai);
             }
         }
     }
@@ -718,7 +718,7 @@ void correct_rate_constants(params *p, int output) {
         p->puptakez *= NDAYS_IN_YR;
         p->nmax *= NDAYS_IN_YR;
         p->pmax *= NDAYS_IN_YR;
-//        p->p_atm_deposition *= NDAYS_IN_YR;
+        p->p_atm_deposition *= NDAYS_IN_YR;
         p->p_rate_par_weather *= NDAYS_IN_YR;
         p->max_p_biochemical *= NDAYS_IN_YR;
         p->rate_sorb_ssorb *= NDAYS_IN_YR;
@@ -748,7 +748,7 @@ void correct_rate_constants(params *p, int output) {
         p->puptakez /= NDAYS_IN_YR;
         p->nmax /= NDAYS_IN_YR;
         p->pmax /= NDAYS_IN_YR;
-//        p->p_atm_deposition /= NDAYS_IN_YR;
+        p->p_atm_deposition /= NDAYS_IN_YR;
         p->p_rate_par_weather /= NDAYS_IN_YR;
         p->max_p_biochemical /= NDAYS_IN_YR;
         p->rate_sorb_ssorb /= NDAYS_IN_YR;
@@ -1017,7 +1017,7 @@ void day_end_calculations(control *c, params *p, state *s, int days_in_year,
     return;
 }
 
-void unpack_met_data(control *c, fluxes *f, met_arrays *ma, met *m, int hod,
+void unpack_met_data(control *c, fluxes *f, met_arrays *ma, met *m, params *p, int hod,
                      double day_length) {
 
     double c1, c2;
@@ -1082,7 +1082,7 @@ void unpack_met_data(control *c, fluxes *f, met_arrays *ma, met *m, int hod,
     f->ninflow = m->ndep + m->nfix;
     
     /* P deposition to fluxes */
-    f->p_atm_dep = m->pdep;
+    f->p_atm_dep = p->p_atm_deposition;
     
     return;
 }

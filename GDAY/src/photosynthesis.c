@@ -1007,7 +1007,7 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
         jmax25 = MIN(jmax25n, jmax25p);
         
         /* need to convert SLA from m2 kg-1 to m2 g-1 */
-        vcmax25 =  p->vcmaxna * N0 + p->vcmaxnb;
+        vcmax25n =  p->vcmaxna * N0 + p->vcmaxnb;
         vcmax25p = p->vcmaxpa * P0 + p->vcmaxpb;
         vcmax25 = MIN(vcmax25n, vcmax25p);
         
@@ -1016,7 +1016,6 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
         
         // Ellsworth et al. 2015 PCE EucFACE relationship with TPU limitation
     }
-
 
     
     /* Temperature-dependent relationship ,

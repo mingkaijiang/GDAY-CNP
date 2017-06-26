@@ -55,7 +55,7 @@ void canopy(canopy_wk *cw, control *c, fluxes *f, met_arrays *ma, met *m,
     year = ma->year[c->hour_idx];
 
     for (hod = 0; hod < c->num_hlf_hrs; hod++) {
-        unpack_met_data(c, f, ma, m, hod, dummy2);
+        unpack_met_data(c, f, ma, m, p, hod, dummy2);
 
         /* calculates diffuse frac from half-hourly incident radiation */
         unpack_solar_geometry(cw, c);
