@@ -199,12 +199,12 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         #"vcmaxpa": "153.1748",    
                         #"vcmaxnb": "74.522",     # 60.526
                         #"vcmaxpb": "57.242",     # 27.66
-                        "jmaxna": "49.743",      # forcing intercept to zero
-                        "jmaxpa": "842.46",      # forcing intercept to zero
+                        "jmaxna": "49.930",      # forcing intercept to zero; if use all species df, 49.743
+                        "jmaxpa": "933.90",      # forcing intercept to zero; if use all species df, 842.46 
                         "jmaxnb": "0.0",         # forcing intercept to zero
                         "jmaxpb": "0.0",         # forcing intercept to zero
-                        "vcmaxna": "27.627",     # forcing intercept to zero
-                        "vcmaxpa": "468.76",     # forcing intercept to zero
+                        "vcmaxna": "27.707",     # forcing intercept to zero; if use all species df, 27.627
+                        "vcmaxpa": "516.83",     # forcing intercept to zero; if use all species df, 468.76
                         "vcmaxnb": "0.0",        # forcing intercept to zero
                         "vcmaxpb": "0.0",        # forcing intercept to zero
                         "measurement_temp": "25.0", # parameters obtained at 22 not 25 degrees
