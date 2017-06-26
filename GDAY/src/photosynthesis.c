@@ -880,7 +880,7 @@ void calculate_jmax_and_vcmax(control *c, params *p, state *s, double Tk,
 
         /* current unit for sla: m2 kg-1; convert into m2 g-1 for Walker relationship */
         if (c->aci_relationship == WALKER) {
-            log_vcmax = 1.993 + 2.555 * log(N0) - 0.372 * log(p->sla) + 0.422 * log(N0) * log(p->sla/1000.0);
+            log_vcmax = 1.993 + 2.555 * log(N0) - 0.372 * log(p->sla/1000.0) + 0.422 * log(N0) * log(p->sla/1000.0);
             vcmax25 = exp(log_vcmax);
             
             log_jmax = 1.197 + 0.847 * log_vcmax;
