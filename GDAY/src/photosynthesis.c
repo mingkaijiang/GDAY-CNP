@@ -967,28 +967,6 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
     *jmax = p->jmax;
     *vcmax = p->vcmax;
   } else if (c->modeljm == 1) {
-//    /* the maximum rate of electron transport at 25 degC */
-//    jmax25n = p->jmaxna * N0 + p->jmaxnb;
-//
-//    /* P limitation on jmax */
-//    jmax25p = p->jmaxpa * P0 + p->jmaxpb;
-//
-//    jmax25 = MIN(jmax25n, jmax25p);
-//
-//    /* this response is well-behaved for TLEAF < 0.0 */
-//    *jmax = peaked_arrh(mt, jmax25, p->eaj, Tk,
-//                        p->delsj, p->edj);
-//
-//    /* the maximum rate of electron transport at 25 degC */
-//    vcmax25n = p->vcmaxna * N0 + p->vcmaxnb;
-//
-//    /* P limitation on jmax */
-//    vcmax25p = p->vcmaxpa * P0 + p->vcmaxpb;
-//
-//    vcmax25 = MIN(vcmax25n, vcmax25p);
-//
-//    *vcmax = arrh(mt, vcmax25, p->eav, Tk);
-
     if (c->aci_relationship == WALKER) {
         // Walker et al. 2014 global synthesis relationship
         /* the maximum rate of electron transport at 25 degC */
@@ -1000,6 +978,7 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
         jmax25 = exp(log_jmax);
         
     } else if (c->aci_relationship == ELLSWORTH) {
+        
         // Ellsworth et al. 2015 PCE EucFACE relationship without TPU limitation
         /* need to convert SLA from m2 kg-1 to m2 g-1 */
         jmax25n = p->jmaxna * N0 + p->jmaxnb;
@@ -1011,10 +990,10 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
         vcmax25p = p->vcmaxpa * P0 + p->vcmaxpb;
         vcmax25 = MIN(vcmax25n, vcmax25p);
         
+        
         //fprintf(stderr, "N0 %f, P0 %f, jmax25n %f, jmax25p %f, vcmax25n %f, vcmax25p %f\n",
         //        N0, P0, jmax25n, jmax25p, vcmax25n, vcmax25p);
         
-        // Ellsworth et al. 2015 PCE EucFACE relationship with TPU limitation
     }
 
     

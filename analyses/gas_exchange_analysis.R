@@ -46,6 +46,33 @@ abline(a=0, b=1)
 with(myDF, plot(Jmax25_TP~Jmax25))
 abline(a=0, b=1)
 
+#### Linear models
+lm1 <- with(myDF, lm(Vcmax25~-1+Narea))
+summary(lm1)
+
+lm1.2 <- with(myDF, lm(Vcmax25_TP~-1+Narea))
+summary(lm1.2)
+
+lm2 <- with(myDF, lm(Vcmax25~-1+Parea))
+summary(lm2)
+
+lm2.2 <- with(myDF, lm(Vcmax25_TP~-1+Parea))
+summary(lm2.2)
+
+lm3 <- with(myDF, lm(Jmax25~-1+Narea))
+summary(lm3)
+
+lm3.2 <- with(myDF, lm(Jmax25_TP~-1+Narea))
+summary(lm3.2)
+
+lm4 <- with(myDF, lm(Jmax25~-1+Parea))
+summary(lm4)
+
+lm4.2 <- with(myDF, lm(Jmax25_TP~-1+Parea))
+summary(lm4.2)
+
+
+
 ### Note: species-mean data is not helpful for computing mixed effect linear model
 ###       so next to read in all species data
 ###       1. need to exclude certain species - cross check with the species mean data to identify which

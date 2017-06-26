@@ -199,12 +199,12 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         #"vcmaxpa": "153.1748",    
                         #"vcmaxnb": "74.522",     # 60.526
                         #"vcmaxpb": "57.242",     # 27.66
-                        "jmaxna": "49.743",      # forcing intercept to zero
-                        "jmaxpa": "842.46",      # forcing intercept to zero
+                        "jmaxna": "50.824",      # forcing intercept to zero; TPU not removed: 49.743
+                        "jmaxpa": "938.1",      # forcing intercept to zero; TPU not removed: 933.9
                         "jmaxnb": "0.0",         # forcing intercept to zero
                         "jmaxpb": "0.0",         # forcing intercept to zero
-                        "vcmaxna": "27.627",     # forcing intercept to zero
-                        "vcmaxpa": "468.76",     # forcing intercept to zero
+                        "vcmaxna": "27.684",     # forcing intercept to zero; TPU not removed: 27.627
+                        "vcmaxpa": "517.11",     # forcing intercept to zero; TPU not removed: 468.76
                         "vcmaxnb": "0.0",        # forcing intercept to zero
                         "vcmaxpb": "0.0",        # forcing intercept to zero
                         "measurement_temp": "25.0", # parameters obtained at 22 not 25 degrees
