@@ -627,13 +627,13 @@ void spin_up_pools(canopy_wk *cw, control *c, fluxes *f, met_arrays *ma, met *m,
             if (c->pcycle) {
                 /* Have we reached a steady state? */
                 fprintf(stderr,
-                        "Spinup: Leaf C - %f, Leaf CN - %f, Leaf CP - %f, Wood C - %f, Soil N - %f, Soil P - %f, LAI - %f, GPP - %f\n",
-                        s->shoot, s->shoot/s->shootn, s->shoot/s->shootp, s->stem, s->soiln, s->soilp, s->lai, f->gpp);
+                        "Spinup: Leaf C - %f, Leaf CN - %f, Leaf CP - %f, Wood C - %f, Soil N - %f, Soil P - %f, LAI - %f\n",
+                        s->shoot, s->shoot/s->shootn, s->shoot/s->shootp, s->stem, s->soiln, s->soilp, s->lai);
             } else {
               /* Have we reached a steady state? */
               fprintf(stderr,
-                      "Spinup: Leaf C - %f, Leaf CN - %f, Wood C - %f, Soil N - %f, LAI - %f, GPP - %f\n",
-                      s->shoot, s->shoot/s->shootn, s->stem, s->soiln, s->lai, f->gpp);
+                      "Spinup: Leaf C - %f, Leaf CN - %f, Wood CN - %f, Wood C - %f, Soil N - %f, LAI - %f\n",
+                      s->shoot, s->shoot/s->shootn, s->stem/s->stemn, s->stem, s->soiln, s->lai);
             }
         }
     }

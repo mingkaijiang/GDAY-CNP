@@ -646,6 +646,7 @@ int np_allocation(control *c, fluxes *f, params *p, state *s, double ncbnew,
         if (arg > ntot && c->fixleafnc == FALSE && c->fixed_lai && c->ncycle) {
             recalc_wb = cut_back_production(c, f, p, s, ntot, ncbnew, nccnew,
                                             ncwimm, ncwnew, doy);
+            fprintf(stderr, "in cut back N \n");
         }
 
         /* If we have allocated more P than we have avail, cut back C prodn */
@@ -979,7 +980,8 @@ void calc_carbon_allocation_fracs(control *c, fluxes *f, params *p, state *s,
         exit(EXIT_FAILURE);
     }
 
-    /*printf("%f %f %f %f %f\n", f->alleaf, f->albranch + f->alstem, f->alroot,  f->alcroot, s->canht);*/
+    //fprintf(stderr, "alleaf %f, alstem %f, alroot %f,  canht %f\n",
+    //       f->alleaf, f->albranch + f->alstem, f->alroot, s->canht);
 
     /* Total allocation should be one, if not print warning */
     total_alloc = f->alroot + f->alleaf + f->albranch + f->alstem + f->alcroot;

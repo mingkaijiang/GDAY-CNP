@@ -76,18 +76,32 @@ allDF2$LMA_g_m2 <- allDF2$LMA
 
 #### Linear model for N and P only relationships
 ### Step 1: N only relationship
-lm1 <- with(allDF2, lm(Vcmax25~N_g_m2+LMA_g_m2))
+lm1 <- with(allDF2, lm(Vcmax25~N_g_m2))
 summary(lm1)
+
+lm1.2 <- lm(Vcmax25~N_g_m2+LMA_g_m2, data=allDF2)
+summary(lm1.2)
+
+lm1.3 <- lm(Vcmax25~-1+N_g_m2, data=allDF2)
+summary(lm1.3)
 
 lm2 <- with(allDF2, lm(Vcmax25~P_g_m2))
 summary(lm2)
 
-lm3 <- with(allDF2, lm(Jmax25~N_g_m2+LMA_g_m2))
+lm2.2 <- with(allDF2, lm(Vcmax25~-1+P_g_m2))
+summary(lm2.2)
+
+lm3 <- with(allDF2, lm(Jmax25~N_g_m2))
 summary(lm3)
+
+lm3.2 <- with(allDF2, lm(Jmax25~-1+N_g_m2))
+summary(lm3.2)
 
 lm4 <- with(allDF2, lm(Jmax25~P_g_m2))
 summary(lm4)
 
+lm4.2 <- with(allDF2, lm(Jmax25~-1+P_g_m2))
+summary(lm4.2)
 
 #### Mixed effect linear model step by step
 ### Step 1: linear model
