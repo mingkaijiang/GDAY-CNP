@@ -360,6 +360,19 @@ int handler(char *section, char *name, char *value, control *c,
             fprintf(stderr, "Unknown triose_p option: %s\n", temp);
             exit(EXIT_FAILURE);
         }
+    } else if (MATCH("control", "tpu_removed")) {
+        if (strcmp(temp, "False") == 0 ||
+            strcmp(temp, "FALSE") == 0 ||
+            strcmp(temp, "false") == 0)
+            c->tpu_removed = FALSE;
+        else if (strcmp(temp, "True") == 0 ||
+                 strcmp(temp, "TRUE") == 0 ||
+                 strcmp(temp, "true") == 0)
+            c->tpu_removed = TRUE;
+        else {
+            fprintf(stderr, "Unknown TPU limitation option: %s\n", temp);
+            exit(EXIT_FAILURE);
+        }
     } else if (MATCH("control", "nuptake_model")) {
         c->nuptake_model = atoi(value);
     } else if (MATCH("control", "puptake_model")) {

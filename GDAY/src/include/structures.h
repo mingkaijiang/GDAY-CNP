@@ -34,6 +34,7 @@ typedef struct {
     int   ncycle;
     int   pcycle;
     int   triose_p;
+    int   tpu_removed;
     int   num_years;
     int   nuptake_model;
     int   puptake_model;
