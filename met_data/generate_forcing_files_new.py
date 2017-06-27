@@ -42,13 +42,16 @@ def main(site, daily_data, yr_sequence, ofname=None, out_yrs=None,
         data_doy.append(int(date.strftime('%j')))
         date += datetime.timedelta(days=1)
 
-    ovar_names = ['#year', 'doy', 'sw_rad', 'tair', 'rain', 'tsoil',
-                  'tam', 'tpm', 'vpd_am', 'vpd_pm', 'vpd_avg', 'co2',
-                  'ndep', 'wind', 'atmos_press', 'par', 'wind_am',
-                 'wind_pm', 'sw_rad_am', 'sw_rad_pm']
-    ounits = ['#--', '--', 'mj/m2/day', 'c', 'mm', 'c', 'c',
-             'c', 'kPa', 'kPa', 'kPa', 'ppm', 't/ha/year', 'm/s',
-             'kPa', 'umol/m2/d', 'm/s', 'm/s', 'mj/m2/am', 'mj/m2/pm']
+    ovar_names = ['#year', 'doy', 'tair', 'rain', 'tsoil',
+                  'tam', 'tpm', 'tmin', 'tmax', 'tday', 
+                  'vpd_am', 'vpd_pm', 'co2',
+                  'ndep', 'nfix', 'pdep', 'wind', 'pres', 'wind_am',
+                  'wind_pm', 'par_am', 'par_pm']
+    ounits = ['#--', '--', 'c', 'mm', 'c', 
+              'c', 'c', 'c', 'c', 'c', 
+              'kPa', 'kPa', 'ppm', 
+              't/ha/year', 't/ha/year', 't/ha/year', 'm/s', 'kPa', 'm/s',
+              'm/s', 'mj/m2/am', 'mj/m2/pm']
 
 
     try:
@@ -86,6 +89,7 @@ def main(site, daily_data, yr_sequence, ofname=None, out_yrs=None,
     
         # get the index of a given shuffled year
         yrs_index = np.asarray(np.where(year_doy[0,:] == y))
+    
 
         for i in yrs_index[0,:]:
             wr.writerow([yr_sequence[yr_index], \
@@ -94,11 +98,13 @@ def main(site, daily_data, yr_sequence, ofname=None, out_yrs=None,
                          daily_data[i,5], daily_data[i,6], \
                          daily_data[i,7], daily_data[i,8], \
                          daily_data[i,9], daily_data[i,10],\
+                         daily_data[i,11],\
                          co2[yr_index], ndep[yr_index],\
-                         daily_data[i,13], daily_data[i,14],\
+                         daily_data[i,14],\
                          daily_data[i,15], daily_data[i,16],\
-                         daily_data[i,17],daily_data[i,18],\
-                         daily_data[i,19]])
+                         daily_data[i,17], daily_data[i,18],\
+                         daily_data[i,19], daily_data[i,20],\
+                         daily_data[i,21]])
     ofp.close()
 
 if __name__ == "__main__":

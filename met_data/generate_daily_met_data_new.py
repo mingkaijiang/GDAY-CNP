@@ -50,13 +50,16 @@ def main(met_fname, ndep_fname, site, ofname, exp_years):
     ndep_data = np.loadtxt(ndep_fname, delimiter=" ", skiprows=1)
     ndep = ndep_data[ndep_data[:,0]>=2012][:,4] * KG_2_TONNES / YR_TO_DAY
 
-    ovar_names = ['#year', 'doy', 'sw_rad', 'tair', 'rain', 'tsoil',
-                  'tam', 'tpm', 'vpd_am', 'vpd_pm', 'vpd_avg', 'co2',
-                  'ndep', 'wind', 'atmos_press', 'par', 'wind_am',
-                  'wind_pm', 'sw_rad_am', 'sw_rad_pm']
-    ounits = ['#--', '--', 'mj/m2/day', 'c', 'mm', 'c', 'c',
-              'c', 'kPa', 'kPa', 'kPa', 'ppm', 't/ha/year', 'm/s',
-              'kPa', 'umol/m2/d', 'm/s', 'm/s', 'mj/m2/am', 'mj/m2/pm']
+    ovar_names = ['#year', 'doy', 'tair', 'rain', 'tsoil',
+                  'tam', 'tpm', 'tmin', 'tmax', 'tday', 
+                  'vpd_am', 'vpd_pm', 'co2',
+                  'ndep', 'nfix', 'pdep', 'wind', 'pres', 'wind_am',
+                  'wind_pm', 'par_am', 'par_pm']
+    ounits = ['#--', '--', 'c', 'mm', 'c', 
+              'c', 'c', 'c', 'c', 'c', 
+              'kPa', 'kPa', 'ppm', 
+              't/ha/year', 't/ha/year', 't/ha/year', 'm/s', 'kPa', 'm/s',
+              'm/s', 'mj/m2/am', 'mj/m2/pm']
 
     start_sim = 2012
     end_sim = 2023
@@ -102,12 +105,29 @@ def main(met_fname, ndep_fname, site, ofname, exp_years):
 
             morning = morning[np.where(morning[:,var_dict["par"]] >= 5.0)]
             afternoon = afternoon[np.where(afternoon[:,var_dict["par"]] >= 5.0)]
+            
+            day_light = days_data[np.where(days_data[:,var_dict["par"]] >= 5.0)]
+            
+            # PAR data is crap, use the rest of the met data,
+            # the PAR will be set below
+            if len(morning) == 0 or len(afternoon):
+                morning = days_data[np.where((days_data[:,var_dict["hour"]] >=6.0) & 
+                                    (days_data[:,var_dict["hour"]] <= 11.5))]
+
+                afternoon = days_data[np.where((days_data[:,var_dict["hour"]] >=12.0) & 
+                                    (days_data[:,var_dict["hour"]] <= 19.0))]
+
+                day_light = days_data[np.where((days_data[:,var_dict["hour"]] >=6.0) & 
+                                    (days_data[:,var_dict["hour"]] <= 19.0))]
 
             # temp -> degC
             tmean = np.mean(np.hstack((morning[:,var_dict["tair"]]-K_to_C, \
-                           afternoon[:,var_dict["tair"]]-K_to_C)))
+                            afternoon[:,var_dict["tair"]]-K_to_C)))
             tam = np.mean(morning[:,var_dict["tair"]]-K_to_C)
             tpm = np.mean(afternoon[:,var_dict["tair"]]-K_to_C)
+            tmin = np.min(days_data[:,var_dict["tair"]]-K_to_C)
+            tmax = np.max(days_data[:,var_dict["tair"]]-K_to_C)
+            tday = np.mean(days_data[:,var_dict["tair"]]-K_to_C)
 
 
             # vpd -> kPa
@@ -137,11 +157,17 @@ def main(met_fname, ndep_fname, site, ofname, exp_years):
             swdown_afternoon = afternoon[:,var_dict["sw"]] * conv
             sw_rad = np.sum(np.hstack((swdown_morning, swdown_afternoon)))
 
+
+            # convert PAR [umol m-2 s-1] -> mj m-2 30min-1
+            conv = UMOL_TO_J * J_TO_MJ * SEC_TO_HFHR
+            par_am = np.sum(morning[:,var_dict["par"]] * conv)
+            par_pm = np.sum(afternoon[:,var_dict["par"]] * conv)
+                
             # convert PAR [umol m-2 s-1] -> umol m-2 d-1
-            conv = SEC_TO_HFHR
-            par_morning = morning[:,var_dict["par"]] * conv
-            par_afternoon = afternoon[:,var_dict["par"]] * conv
-            par_day = np.sum(np.hstack((par_morning, par_afternoon)))
+            #conv = SEC_TO_HFHR
+            #par_morning = morning[:,var_dict["par"]] * conv
+            #par_afternoon = afternoon[:,var_dict["par"]] * conv
+            #par_day = np.sum(np.hstack((par_morning, par_afternoon)))
 
             tsoil = np.mean(np.hstack((morning[:,var_dict["tsoil"]]-K_to_C, \
                                        afternoon[:,var_dict["tsoil"]]-K_to_C)))
@@ -173,12 +199,23 @@ def main(met_fname, ndep_fname, site, ofname, exp_years):
             # Need to take the whole day mean for CO2 to get the correct
             # forcing data, not the daylight only data.
             co2 = np.mean(days_data[:,var_dict["co2"]])
+            
+            et = 300.0  #mm yr-1
+            bn1 = 0.102
+            bn2 = 0.524
+            MM_2_CM = 0.1
+            KG_HA_2_G_M2 = 0.1
+            G_M2_to_TONNES_HA = 0.01
+            # bnf (kg N ha-1 yr-1) = (bn1 * (ET * mm_2_cm) + bn2) * kg_ha_2_g_m2
+            nfix = (bn1 * (et * MM_2_CM) + bn2) * KG_HA_2_G_M2
+            nfix *= G_M2_to_TONNES_HA / YR_TO_DAY
+    
+            pdep = 0.0000093
 
-
-            wr.writerow([yr, day, sw_rad, tmean, rain, tsoil, tam, tpm, vpd_am, \
-                         vpd_pm, vpd_avg, co2, ndep[prjday], \
-                         wind_sp, atpress, par_day, wind_am, wind_pm,\
-                         np.sum(swdown_morning), np.sum(swdown_afternoon)])
+            wr.writerow([yr, day, tmean, rain, tsoil, tam, tpm, tmin, tmax, tday, vpd_am, \
+                         vpd_pm, co2, ndep[prjday], nfix, pdep, \
+                         wind_sp, atpress, wind_am, wind_pm, par_am, \
+                         par_pm])
 
             prjday += 1
         daily_day_count+=1
