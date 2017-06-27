@@ -6,8 +6,7 @@
 
 ########################## Main program ######################################
 ##############################################################################
-#### This script analyze newer met results
-#### i.e. amb_avg and ele_avg results
+
 
 ### Read in files
 ## DE relationship, N only
