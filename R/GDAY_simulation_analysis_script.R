@@ -82,7 +82,6 @@ dev.off()
 ## Plot CO2 effect at annnual timestep  - add new P limitation GDAY result
 
 ## To do list:
-# 2. Parameterize so that the site is P-limited
 # 3. Add plot onto Medlyn 2016
 # 4. Generate results for DE
 # 5. Make poster using quasi-equil framework (i.e. re-parameterize the simplfied GDAY)
