@@ -249,12 +249,12 @@ with(laiRSP2, points(gdap~Year, type="l", lty = 1, col = "orange", lwd = 2.5))
 
 dev.off()
 
-
+## Plot annual pattern
 pdf('R/annual_pattern.pdf')
 par(mfrow=c(2,1), mar=c(2.1, 3.1, 2.1, 3.1),
     mgp=c(2,1,0))
 
-## GPP
+# GPP
 with(gppDF, plot(cabl_amb~Year, ylim = c(0, 3000), type="l", lwd = 2,
                  ylab = "GPP [g C m-2 yr-1]", lty = 2, col = "darkgreen"))
 with(gppDF, points(clm4_amb~Year, type="l", lty = 1, col = "blue", lwd = 2))
@@ -269,7 +269,7 @@ legend("bottomright", c("CABLE", "CLM4", "CLM-P", "GDAY", "LPJ", "OCN", "SDVM", 
                                                 "blue", "blue", "red", "orange"),
        cex = 0.7, bg = "white")
 
-## LAI
+# LAI
 with(laiDF, plot(cabl_amb~Year, ylim = c(1, 5), type="l", lwd = 2,
                  ylab = "LAI", lty = 2, col = "darkgreen"))
 with(laiDF, points(clm4_amb~Year, type="l", lty = 1, col = "blue", lwd = 2))
@@ -282,4 +282,3 @@ with(laiDF, points(gdap_amb~Year, type="l", lty = 1, col = "orange", lwd = 2.5))
 
 
 dev.off()
-
