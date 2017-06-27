@@ -209,6 +209,7 @@ def main(met_fname, ndep_fname, site, ofname, exp_years):
             # bnf (kg N ha-1 yr-1) = (bn1 * (ET * mm_2_cm) + bn2) * kg_ha_2_g_m2
             nfix = (bn1 * (et * MM_2_CM) + bn2) * KG_HA_2_G_M2
             nfix *= G_M2_to_TONNES_HA / YR_TO_DAY
+            nfix = 0.0
     
             pdep = 0.0000093
 

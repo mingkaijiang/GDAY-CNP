@@ -148,9 +148,9 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, AMB_AVG=True, ELE_
                         "nccnewz": "0.003",          #new coarse root N C at zero leaf N C
                         "nccnew": "0.003",           #new coarse root N C at critical leaf N C
                         "ncrfac": "0.8",
-                        "ncmaxfyoung": "0.04",
-                        "ncmaxfold": "0.04",
-                        "ncmaxr": "0.03",
+                        "ncmaxfyoung": "0.1",
+                        "ncmaxfold": "0.1",
+                        "ncmaxr": "0.1",
                         "retransmob": "0.0",
                         "fdecay": "0.6",    # 18 mth turnover * 1/30
                         "fdecaydry": "0.6", # 18 mth turnover * 1/30
@@ -230,8 +230,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, AMB_AVG=True, ELE_
                         "pcbnewz": "0.0003",
                         "pccnew": "0.0003",
                         "pccnewz": "0.0003",
-                        "pcmaxfold": "0.002",    # 0.0015 Table 3, Olander et al. 2005, Earth Interactions.
-                        "pcmaxfyoung": "0.002",
+                        "pcmaxfold": "0.02",    # 0.0015 Table 3, Olander et al. 2005, Earth Interactions.
+                        "pcmaxfyoung": "0.02",
                         "pcmaxr": "0.0006",
                         "pcrfac": "0.8",
                         "pcwimm": "0.00014",
@@ -249,8 +249,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, AMB_AVG=True, ELE_
                         "pmin": "0.01",
                         "pmin0": "0.0",
                         "pmincrit": "2.0",
-                        "prateloss": "0.05",
-                        "prateuptake": "3.6",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
+                        "prateloss": "0.1",
+                        "prateuptake": "3.0",    # Reduce to get an P limitation effect
                         "slowpcmin": "0.005",
                         "slowpcmax": "0.011111",
                         "soilph": "4.5",          # Olander et al., 2005, Earth Interactions.
