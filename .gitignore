@@ -38,10 +38,10 @@ met_data/*.csv
 met_data/raw_met_data/*.csv
 outputs/*.csv
 outputs/*.nceas
-outputs/withoutP/*.csv
-outputs/withP/*.csv
+outputs/old/*.csv
 data/*.csv
 analyses/*.csv
+
 
 # All nc files
 met_data/raw_met_data/*.nc

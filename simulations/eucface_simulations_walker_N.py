@@ -19,7 +19,7 @@ __author__  = "Martin De Kauwe"
 __version__ = "1.0 (14.12.2014)"
 __email__   = "mdekauwe@gmail.com"
 
-def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION=True, ELE_SPINUP=True, ELE_EQUILIB=True):
+def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, AMB_AVG=True, ELE_AVG=True):
 
     GDAY_SPIN = "./gday -s -p "
     GDAY = "./gday -p "
@@ -43,7 +43,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
         # effectively zero
         itag = "%s_%s_model_spinup" % (experiment_id, site)
         otag = "%s_%s_model_spunup" % (experiment_id, site)
-        mtag = "%s_met_data_amb_var_co2.csv" % (site)
+        mtag = "%s_met_data_equilibrium_50_yrs.csv" % (site)
         out_fn = itag + "_equilib.out"
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -306,35 +306,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
-        mtag = "%s_met_data_amb_var_co2.csv" % (site)
-        out_fn = "%s_amb_equilib.csv" % (site)
-        out_param_fname = os.path.join(param_dir, otag + ".cfg")
-        cfg_fname = os.path.join(param_dir, itag + ".cfg")
-        met_fname = os.path.join(met_dir, mtag)
-        out_fname = os.path.join(run_dir, out_fn)
-
-        replace_dict = {
-                         # files
-                         "out_param_fname": "%s" % (out_param_fname),
-                         "cfg_fname": "%s" % (cfg_fname),
-                         "met_fname": "%s" % (met_fname),
-                         "out_fname": "%s" % (out_fname),
-     
-                         # control
-                         "print_options": "end",
-                        }
-        ad.adjust_param_file(cfg_fname, replace_dict)
-        os.system(GDAY + cfg_fname)
-
-    if POST_INDUST == True:
-
-        # copy spunup base files to make two new experiment files
-        shutil.copy(os.path.join(param_dir, "%s_%s_model_spunup.cfg" % (experiment_id, site)),
-                    os.path.join(param_dir, "%s_%s_model_spunup_adj.cfg" % (experiment_id, site)))
-
-        itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
-        otag = "%s_%s_model_indust" % (experiment_id, site)
-        mtag = "%s_met_data_amb_var_co2.csv" % (site)
+        mtag = "%s_met_data_industrial_to_present_1750_2011.csv" % (site)
         out_fn = "%s_amb_01_walker_N.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -349,22 +321,22 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                          "out_fname": "%s" % (out_fname),
      
                          # control
-                         "print_options": "daily",
+                         "print_options": "end",
                         }
         ad.adjust_param_file(cfg_fname, replace_dict)
         os.system(GDAY + cfg_fname)
     
-    # elevated co2 initialization to store output 
-    if ELE_INITIALIZATION == True:
+    # Ambient CO2 fixed met output
+    if AMB_AVG == True:
         
         # copy last cfg file and make new one
         shutil.copy(os.path.join(param_dir, "%s_%s_model_indust.cfg" % (experiment_id, site)),
                     os.path.join(param_dir, "%s_%s_model_indust_adj.cfg" % (experiment_id, site)))
 
         itag = "%s_%s_model_indust_adj" % (experiment_id, site)
-        otag = "%s_%s_model_ele_initial" % (experiment_id, site)
-        mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
-        out_fn = "%s_ele_02_walker_N.csv" % (site)
+        otag = "%s_%s_model_amb_avg" % (experiment_id, site)
+        mtag = "%s_met_data_amb_avg_co2.csv" % (site)
+        out_fn = "%s_amb_avg_02_walker_N.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
         met_fname = os.path.join(met_dir, mtag)
@@ -383,75 +355,18 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
         ad.adjust_param_file(cfg_fname, replace_dict)
         os.system(GDAY + cfg_fname)
     
-    # elevated co2 initialization to store cfg
-    if ELE_INITIALIZATION == True:
+    
+    # Elevated CO2 fixed met output
+    if ELE_AVG == True:
         
         # copy last cfg file and make new one
         shutil.copy(os.path.join(param_dir, "%s_%s_model_indust.cfg" % (experiment_id, site)),
                     os.path.join(param_dir, "%s_%s_model_indust_adj.cfg" % (experiment_id, site)))
 
         itag = "%s_%s_model_indust_adj" % (experiment_id, site)
-        otag = "%s_%s_model_ele_initial" % (experiment_id, site)
-        mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
-        out_fn = "%s_ele_initial.csv" % (site)
-        out_param_fname = os.path.join(param_dir, otag + ".cfg")
-        cfg_fname = os.path.join(param_dir, itag + ".cfg")
-        met_fname = os.path.join(met_dir, mtag)
-        out_fname = os.path.join(run_dir, out_fn)
-        replace_dict = {
-                         # files
-                         "out_param_fname": "%s" % (out_param_fname),
-                         "cfg_fname": "%s" % (cfg_fname),
-                         "met_fname": "%s" % (met_fname),
-                         "out_fname": "%s" % (out_fname),
-    
-                         # control
-                         "print_options": "end",
-    
-                        }
-        ad.adjust_param_file(cfg_fname, replace_dict)
-        os.system(GDAY + cfg_fname)
-    
-    # elevated CO2 during spin up to store cfg file
-    if ELE_SPINUP == True:
-        
-        # copy last cfg file and make new one
-        shutil.copy(os.path.join(param_dir, "%s_%s_model_ele_initial.cfg" % (experiment_id, site)),
-                    os.path.join(param_dir, "%s_%s_model_ele_spinup.cfg" % (experiment_id, site)))
-
-        itag = "%s_%s_model_ele_spinup" % (experiment_id, site)
-        otag = "%s_%s_model_ele_spunup" % (experiment_id, site)
-        mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
-        out_fn = "%s_ele_03_walker_N.csv" % (site)
-        out_param_fname = os.path.join(param_dir, otag + ".cfg")
-        cfg_fname = os.path.join(param_dir, itag + ".cfg")
-        met_fname = os.path.join(met_dir, mtag)
-        out_fname = os.path.join(run_dir, out_fn)
-        replace_dict = {
-                         # files
-                         "out_param_fname": "%s" % (out_param_fname),
-                         "cfg_fname": "%s" % (cfg_fname),
-                         "met_fname": "%s" % (met_fname),
-                         "out_fname": "%s" % (out_fname),
-    
-                         # control
-                         "print_options": "end",
-    
-                        }
-        ad.adjust_param_file(cfg_fname, replace_dict)
-        os.system(GDAY_SPIN + cfg_fname)
-    
-    # elevated co2 final equilibrium simulation
-    if ELE_EQUILIB == True:
-        
-        # copy last cfg file and make new one
-        shutil.copy(os.path.join(param_dir, "%s_%s_model_ele_spunup.cfg" % (experiment_id, site)),
-                    os.path.join(param_dir, "%s_%s_model_ele_equil.cfg" % (experiment_id, site)))
-
-        itag = "%s_%s_model_ele_equil" % (experiment_id, site)
-        otag = "%s_%s_model_ele_final" % (experiment_id, site)
-        mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
-        out_fn = "%s_ele_03_walker_N.csv" % (site)
+        otag = "%s_%s_model_ele_avg" % (experiment_id, site)
+        mtag = "%s_met_data_ele_avg_co2.csv" % (site)
+        out_fn = "%s_ele_avg_03_walker_N.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
         met_fname = os.path.join(met_dir, mtag)
@@ -474,5 +389,6 @@ if __name__ == "__main__":
 
     experiment_id = "FACE"
     site = "EUC"
-    treatment = "ele"
-    main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION=True, ELE_SPINUP=True, ELE_EQUILIB=True)
+    treatment = "amb"
+    main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, AMB_AVG=True, ELE_AVG=True)
+
