@@ -27,6 +27,32 @@ Process_Amazon_Data <- function(inName, outName) {
         myDF[,i] <- rep(myDF[1:365, i], times=yr.range)
     }
     
+    myDF[(nrow(myDF)+1), 3:22] <- myDF[myDF$year == 2000 & myDF$doy == 365, 3:22]
+    myDF[nrow(myDF), "year"] <- 2000
+    myDF[nrow(myDF), "doy"] <- 366
+    
+    myDF[(nrow(myDF)+1), 3:22] <- myDF[myDF$year == 2004 & myDF$doy == 365, 3:22]
+    myDF[nrow(myDF), "year"] <- 2004
+    myDF[nrow(myDF), "doy"] <- 366
+    
+    myDF[(nrow(myDF)+1), 3:22] <- myDF[myDF$year == 2008 & myDF$doy == 365, 3:22]
+    myDF[nrow(myDF), "year"] <- 2008
+    myDF[nrow(myDF), "doy"] <- 366
+    
+    myDF[(nrow(myDF)+1), 3:22] <- myDF[myDF$year == 2012 & myDF$doy == 365, 3:22]
+    myDF[nrow(myDF), "year"] <- 2012
+    myDF[nrow(myDF), "doy"] <- 366
+    
+    myDF[(nrow(myDF)+1), 3:22] <- myDF[myDF$year == 2016 & myDF$doy == 365, 3:22]
+    myDF[nrow(myDF), "year"] <- 2016
+    myDF[nrow(myDF), "doy"] <- 366
+    
+    myDF[(nrow(myDF)+1), 3:22] <- myDF[myDF$year == 2020 & myDF$doy == 365, 3:22]
+    myDF[nrow(myDF), "year"] <- 2020
+    myDF[nrow(myDF), "doy"] <- 366
+    
+    outDF <- myDF[order(myDF$year,myDF$doy),]
+    
     ### rows
     row1 <- "# simplified gday met forcing transient"
     row2 <- "# Data from 1 - 500 years"
@@ -55,7 +81,7 @@ Process_Amazon_Data <- function(inName, outName) {
     write.table(row5, outName,
                 col.names=F, row.names=F, sep=",", append=T, quote=F)
     
-    write.table(myDF, outName,
+    write.table(outDF, outName,
                 col.names=F, row.names=F, sep=",", append=T, quote=F)
     
 }
