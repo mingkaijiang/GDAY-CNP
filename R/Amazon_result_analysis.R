@@ -58,10 +58,10 @@ for (i in 1999:2023) {
     nepDF[gppDF$Year == i, "gday_p_ele"] <- sum(de_np_DF3[de_np_DF3$YEAR == i, "NEP"], na.rm=T)
     
     # SOil C
-    soilDF[leafDF$Year == i, "gday_n_amb"] <- de_n_DF2[de_n_DF2$YEAR == i & de_n_DF2$DOY == 1, "CL"]
-    soilDF[leafDF$Year == i, "gday_p_amb"] <- de_np_DF2[de_np_DF2$YEAR == i & de_np_DF2$DOY == 1, "CL"]
-    soilDF[leafDF$Year == i, "gday_n_ele"] <- de_n_DF3[de_n_DF3$YEAR == i & de_n_DF3$DOY == 1, "CL"]
-    soilDF[leafDF$Year == i, "gday_p_ele"] <- de_np_DF3[de_np_DF3$YEAR == i & de_np_DF3$DOY == 1, "CL"]
+    soilDF[leafDF$Year == i, "gday_n_amb"] <- de_n_DF2[de_n_DF2$YEAR == i & de_n_DF2$DOY == 1, "CSOIL"]
+    soilDF[leafDF$Year == i, "gday_p_amb"] <- de_np_DF2[de_np_DF2$YEAR == i & de_np_DF2$DOY == 1, "CSOIL"]
+    soilDF[leafDF$Year == i, "gday_n_ele"] <- de_n_DF3[de_n_DF3$YEAR == i & de_n_DF3$DOY == 1, "CSOIL"]
+    soilDF[leafDF$Year == i, "gday_p_ele"] <- de_np_DF3[de_np_DF3$YEAR == i & de_np_DF3$DOY == 1, "CSOIL"]
 }
 
 
@@ -71,6 +71,8 @@ laiDF[,"gday_n"] <- (laiDF[,"gday_n_ele"] - laiDF[,"gday_n_amb"])/laiDF[,"gday_n
 leafDF[,"gday_n"] <- (leafDF[,"gday_n_ele"] - leafDF[,"gday_n_amb"])/leafDF[,"gday_n_amb"] * 100.0
 npDF[,"gday_n"] <- (npDF[,"gday_n_ele"] - npDF[,"gday_n_amb"])/npDF[,"gday_n_amb"] * 100.0
 woodDF[,"gday_n"] <- (woodDF[,"gday_n_ele"] - woodDF[,"gday_n_amb"])/woodDF[,"gday_n_amb"] * 100.0
+nepDF[,"gday_n"] <- (nepDF[,"gday_n_ele"] - nepDF[,"gday_n_amb"])
+soilDF[,"gday_n"] <- (soilDF[,"gday_n_ele"] - soilDF[,"gday_n_amb"])/soilDF[,"gday_n_amb"] * 100.0
 
 
 gppDF[,"gday_p"] <- (gppDF[,"gday_p_ele"] - gppDF[,"gday_p_amb"])/gppDF[,"gday_p_amb"] * 100.0
@@ -78,10 +80,12 @@ laiDF[,"gday_p"] <- (laiDF[,"gday_p_ele"] - laiDF[,"gday_p_amb"])/laiDF[,"gday_p
 leafDF[,"gday_p"] <- (leafDF[,"gday_p_ele"] - leafDF[,"gday_p_amb"])/leafDF[,"gday_p_amb"] * 100.0
 npDF[,"gday_p"] <- (npDF[,"gday_p_ele"] - npDF[,"gday_p_amb"])/npDF[,"gday_p_amb"] * 100.0
 woodDF[,"gday_p"] <- (woodDF[,"gday_p_ele"] - woodDF[,"gday_p_amb"])/woodDF[,"gday_p_amb"] * 100.0
+nepDF[,"gday_p"] <- (nepDF[,"gday_p_ele"] - nepDF[,"gday_p_amb"])
+soilDF[,"gday_p"] <- (soilDF[,"gday_p_ele"] - soilDF[,"gday_p_amb"])/soilDF[,"gday_p_amb"] * 100.0
 
 
 
-pdf("R/UK_workshop_parameters_amazon.pdf", width = 9, height = 9)
+pdf("R/UK_workshop_co2_effect_amazon.pdf", width = 9, height = 9)
 m <- matrix(c(1,2,3,4,5,5),nrow = 3, ncol = 2, byrow = TRUE)
 
 layout(mat = m,heights = c(0.4,0.4,0.2))
@@ -92,26 +96,26 @@ par(mar=c(5.1, 6.1, 3.1, 6.1),
 # GPP
 with(gppDF, plot(gday_n~Year, ylim=c(-10,30), 
                  ylab = "GPP % response",cex.axis = 1.5,
-                 type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(gppDF, points(gday_p~Year, type="l", col = "red", lwd = 3))
+                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(gppDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
 
 # LAI
 with(laiDF, plot(gday_n~Year, ylim=c(-10,30), 
                  ylab = "LAI % response",cex.axis = 1.5,
-                 type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(laiDF, points(gday_p~Year, type="l", col = "red", lwd = 3))
+                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(laiDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
 
-# Leaf C
-with(leafDF, plot(gday_n~Year, ylim=c(-10,30), 
-                  ylab = "Leaf C % response",cex.axis = 1.5,
-                  type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(leafDF, points(gday_p~Year, type="l", col = "red", lwd = 3))
+# NEP
+with(nepDF, plot(gday_n~Year, ylim=c(-100,500), 
+                 ylab = expression(paste("NEP response [g ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
+                 type="b", lwd = 3, col = "brown", cex.lab = 2))
+with(nepDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
 
-# Leaf NP
-with(npDF, plot(gday_n~Year, ylim=c(-10,10), 
-                ylab = "Leaf N:P ratio % response",cex.axis = 1.5,
-                type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(npDF, points(gday_p~Year, type="l", col = "red", lwd = 3))
+# Soil C
+with(soilDF, plot(gday_n~Year, ylim=c(-2,2), 
+                  ylab = "Soil C % response",cex.axis = 1.5,
+                  type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(soilDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
 
 
 plot(1, type = "n", axes=FALSE, xlab="", ylab="")
@@ -122,12 +126,44 @@ legend("top",
 
 dev.off()
 
+### Time series plot
+pdf("R/UK_workshop_temporal_amazon.pdf", width = 9, height = 9)
+m <- matrix(c(1,2,3,4,5,5),nrow = 3, ncol = 2, byrow = TRUE)
+
+layout(mat = m,heights = c(0.4,0.4,0.2))
+
+par(mar=c(5.1, 6.1, 3.1, 6.1),
+    mgp=c(3,1,0))
+
+# GPP
+with(gppDF, plot(gday_n_ele/1000~Year, ylim=c(0,5), 
+                 ylab = expression(paste("GPP [kg ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
+                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(gppDF, points(gday_p_ele/1000~Year, type="b", col = "red", lwd = 3))
+
+# LAI
+with(laiDF, plot(gday_n_ele~Year, ylim=c(0, 8), 
+                 ylab = "LAI",cex.axis = 1.5,
+                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(laiDF, points(gday_p_ele~Year, type="b", col = "red", lwd = 3))
+
+# NEP
+with(nepDF, plot(gday_n_ele/1000~Year, ylim=c(-1,1), 
+                 ylab = expression(paste("NEP [kg ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
+                 type="b", lwd = 3, col = "brown", cex.lab = 2))
+with(nepDF, points(gday_p_ele/1000~Year, type="b", col = "red", lwd = 3))
+
+# Soil C
+with(soilDF, plot(gday_n_ele/1000~Year, ylim=c(0,12), 
+                  ylab = expression(paste("Soil C [kg ", m^-2, "]")),cex.axis = 1.5,
+                  type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(soilDF, points(gday_p_ele/1000~Year, type="b", col = "red", lwd = 3))
 
 
-### Will need to subtract met data for 2012-2023 for AmazonFACE and run model just for these periods using CO2 data from EucFACE
-### So that we are consistently comparing the same CO2 effect
+plot(1, type = "n", axes=FALSE, xlab="", ylab="")
+legend("top",
+       legend = c("N only", "NP model"), 
+       col=c("brown", "red"), lwd=5, cex=1.5, horiz = TRUE, pt.cex = 5,
+       pt.lwd = 5)
 
-### TO do list:
-### 1. run AmazonFACE
-### 2. run quasi-equil framework with parameters from EucFACE and AmazonFACE, plotting
-### 3. Plot inst, L and VL constraint comparisons.
+dev.off()

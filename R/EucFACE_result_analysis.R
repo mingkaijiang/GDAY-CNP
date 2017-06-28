@@ -75,26 +75,26 @@ par(mar=c(5.1, 6.1, 3.1, 6.1),
 # GPP
 with(gppDF, plot(gday_n~Year, ylim=c(-10,30), 
                  ylab = "GPP % response",cex.axis = 1.5,
-                 type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(gppDF, points(gday_p~Year, type="l", col = "red", lwd = 3))
+                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(gppDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
 
 # LAI
 with(laiDF, plot(gday_n~Year, ylim=c(-10,30), 
                  ylab = "LAI % response",cex.axis = 1.5,
-                 type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(laiDF, points(gday_p~Year, type="l", col = "red", lwd = 3))
+                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(laiDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
 
 # NEP
 with(nepDF, plot(gday_n*100~Year, ylim=c(-100,500), 
                   ylab = expression(paste("NEP response [g ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
-                  type="l", lwd = 3, col = "brown", cex.lab = 2))
-with(nepDF, points(gday_p*100~Year, type="l", col = "red", lwd = 3))
+                  type="b", lwd = 3, col = "brown", cex.lab = 2))
+with(nepDF, points(gday_p*100~Year, type="b", col = "red", lwd = 3))
 
 # Soil C
 with(soilDF, plot(gday_n~Year, ylim=c(-2,2), 
                 ylab = "Soil C % response",cex.axis = 1.5,
-                type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(soilDF, points(gday_p~Year, type="l", col = "red", lwd = 3))
+                type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(soilDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
 
 
 plot(1, type = "n", axes=FALSE, xlab="", ylab="")
@@ -118,26 +118,26 @@ par(mar=c(5.1, 6.1, 3.1, 6.1),
 # GPP
 with(gppDF, plot(gday_n_ele/10~Year, ylim=c(0,5), 
                  ylab = expression(paste("GPP [kg ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
-                 type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(gppDF, points(gday_p_ele/10~Year, type="l", col = "red", lwd = 3))
+                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(gppDF, points(gday_p_ele/10~Year, type="b", col = "red", lwd = 3))
 
 # LAI
-with(laiDF, plot(gday_n_ele~Year, ylim=c(0, 3), 
+with(laiDF, plot(gday_n_ele~Year, ylim=c(0, 8), 
                  ylab = "LAI",cex.axis = 1.5,
-                 type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(laiDF, points(gday_p_ele~Year, type="l", col = "red", lwd = 3))
+                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(laiDF, points(gday_p_ele~Year, type="b", col = "red", lwd = 3))
 
 # NEP
-with(nepDF, plot(gday_n_ele/10~Year, ylim=c(-1,5), 
+with(nepDF, plot(gday_n_ele/10~Year, ylim=c(-1,1), 
                  ylab = expression(paste("NEP [kg ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
-                 type="l", lwd = 3, col = "brown", cex.lab = 2))
-with(nepDF, points(gday_p_ele/10~Year, type="l", col = "red", lwd = 3))
+                 type="b", lwd = 3, col = "brown", cex.lab = 2))
+with(nepDF, points(gday_p_ele/10~Year, type="b", col = "red", lwd = 3))
 
 # Soil C
 with(soilDF, plot(gday_n_ele/10~Year, ylim=c(0,12), 
                   ylab = expression(paste("Soil C [kg ", m^-2, "]")),cex.axis = 1.5,
-                  type="l", lwd = 3, col = "brown", cex.lab = 2.5))
-with(soilDF, points(gday_p_ele/10~Year, type="l", col = "red", lwd = 3))
+                  type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+with(soilDF, points(gday_p_ele/10~Year, type="b", col = "red", lwd = 3))
 
 
 plot(1, type = "n", axes=FALSE, xlab="", ylab="")
