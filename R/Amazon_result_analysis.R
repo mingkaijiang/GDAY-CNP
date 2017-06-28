@@ -94,34 +94,47 @@ par(mar=c(5.1, 6.1, 3.1, 6.1),
     mgp=c(4,1,0))
 
 # GPP
+
 with(gppDF, plot(gday_n~Year, ylim=c(-10,30), 
                  ylab = "GPP % response",cex.axis = 1.5,
-                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+                 type="b", lwd = 3, col = "green", cex.lab = 2.5))
 with(gppDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
+x<-par("usr")
+rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
+grid(lty=6, col="white")
 
 # LAI
 with(laiDF, plot(gday_n~Year, ylim=c(-10,30), 
                  ylab = "LAI % response",cex.axis = 1.5,
-                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+                 type="b", lwd = 3, col = "green", cex.lab = 2.5))
 with(laiDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
+x<-par("usr")
+rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
+grid(lty=6, col="white")
 
 # NEP
 with(nepDF, plot(gday_n~Year, ylim=c(-100,500), 
                  ylab = expression(paste("NEP response [g ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
-                 type="b", lwd = 3, col = "brown", cex.lab = 2))
+                 type="b", lwd = 3, col = "green", cex.lab = 2))
 with(nepDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
+x<-par("usr")
+rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
+grid(lty=6, col="white")
 
 # Soil C
 with(soilDF, plot(gday_n~Year, ylim=c(-2,2), 
                   ylab = "Soil C % response",cex.axis = 1.5,
-                  type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+                  type="b", lwd = 3, col = "green", cex.lab = 2.5))
 with(soilDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
+x<-par("usr")
+rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
+grid(lty=6, col="white")
 
 
 plot(1, type = "n", axes=FALSE, xlab="", ylab="")
 legend("top",
        legend = c("N only", "NP model"), 
-       col=c("brown", "red"), lwd=5, cex=1.5, horiz = TRUE, pt.cex = 5,
+       col=c("green", "red"), lwd=5, cex=1.5, horiz = TRUE, pt.cex = 5,
        pt.lwd = 5)
 
 dev.off()
@@ -138,32 +151,43 @@ par(mar=c(5.1, 6.1, 3.1, 6.1),
 # GPP
 with(gppDF, plot(gday_n_ele/1000~Year, ylim=c(0,5), 
                  ylab = expression(paste("GPP [kg ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
-                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+                 type="b", lwd = 3, col = "green", cex.lab = 2.5))
 with(gppDF, points(gday_p_ele/1000~Year, type="b", col = "red", lwd = 3))
+x<-par("usr")
+rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
+grid(lty=6, col="white")
 
 # LAI
 with(laiDF, plot(gday_n_ele~Year, ylim=c(0, 8), 
                  ylab = "LAI",cex.axis = 1.5,
-                 type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+                 type="b", lwd = 3, col = "green", cex.lab = 2.5))
 with(laiDF, points(gday_p_ele~Year, type="b", col = "red", lwd = 3))
+x<-par("usr")
+rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
+grid(lty=6, col="white")
 
 # NEP
 with(nepDF, plot(gday_n_ele/1000~Year, ylim=c(-1,1), 
                  ylab = expression(paste("NEP [kg ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
-                 type="b", lwd = 3, col = "brown", cex.lab = 2))
+                 type="b", lwd = 3, col = "green", cex.lab = 2))
 with(nepDF, points(gday_p_ele/1000~Year, type="b", col = "red", lwd = 3))
+x<-par("usr")
+rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
+grid(lty=6, col="white")
 
 # Soil C
 with(soilDF, plot(gday_n_ele/1000~Year, ylim=c(0,12), 
                   ylab = expression(paste("Soil C [kg ", m^-2, "]")),cex.axis = 1.5,
-                  type="b", lwd = 3, col = "brown", cex.lab = 2.5))
+                  type="b", lwd = 3, col = "green", cex.lab = 2.5))
 with(soilDF, points(gday_p_ele/1000~Year, type="b", col = "red", lwd = 3))
-
+x<-par("usr")
+rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
+grid(lty=6, col="white")
 
 plot(1, type = "n", axes=FALSE, xlab="", ylab="")
 legend("top",
        legend = c("N only", "NP model"), 
-       col=c("brown", "red"), lwd=5, cex=1.5, horiz = TRUE, pt.cex = 5,
+       col=c("green", "red"), lwd=5, cex=1.5, horiz = TRUE, pt.cex = 5,
        pt.lwd = 5)
 
 dev.off()
