@@ -5,25 +5,27 @@
 
 ### Read in files
 ## DE relationship, N only
-de_n_DF2 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought/outputs/AmaFACE1_D_GDA_AMB_OBS.csv", skip=3)
-de_n_DF3 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought/outputs/AmaFACE1_D_GDA_ELE_OBS.csv", skip=3)
+de_n_DF2 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought/outputs/AmaFACE1_D_GDA_AMB_1999_2023.csv", skip=3)
+de_n_DF3 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought/outputs/AmaFACE1_D_GDA_ELE_1999_2023.csv", skip=3)
 
 ## DE relationship, N P 
-de_np_DF2 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought_p/outputs/AmaFACE1_D_GDP_AMB_OBS.csv", skip=3)
-de_np_DF3 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought_p/outputs/AmaFACE1_D_GDP_ELE_OBS.csv", skip=3)
+de_np_DF2 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought_p/outputs/AmaFACE1_D_GDA_AMB_1999_2023.csv", skip=3)
+de_np_DF3 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought_p/outputs/AmaFACE1_D_GDA_ELE_1999_2023.csv", skip=3)
 
 
 #### Process the data to plot annual patterns
 ## Generate output DF at annual timestep
-gppDF <- data.frame(seq(2012, 2023, by=1), NA, NA, NA, NA)
+gppDF <- data.frame(seq(1999, 2023, by=1), NA, NA, NA, NA)
 colnames(gppDF) <- c("Year", "gday_n_amb","gday_p_amb", "gday_n_ele", "gday_p_ele")
 laiDF <- gppDF
 leafDF <- gppDF
 npDF <- gppDF
 woodDF <- gppDF
+nepDF <- gppDF
+soilDF <- gppDF
 
 ## store data
-for (i in 2012:2023) {
+for (i in 1999:2023) {
     # GPP
     gppDF[gppDF$Year == i, "gday_n_amb"] <- sum(de_n_DF2[de_n_DF2$YEAR == i, "GPP"], na.rm=T)
     gppDF[gppDF$Year == i, "gday_p_amb"] <- sum(de_np_DF2[de_np_DF2$YEAR == i, "GPP"], na.rm=T)
@@ -49,6 +51,17 @@ for (i in 2012:2023) {
     npDF[npDF$Year == i, "gday_n_ele"] <- de_n_DF3[de_n_DF3$YEAR == i & de_n_DF3$DOY == 1, "NL"]/de_n_DF3[de_n_DF3$YEAR == i & de_n_DF3$DOY == 1, "PL"]
     npDF[npDF$Year == i, "gday_p_ele"] <- de_np_DF3[de_np_DF3$YEAR == i & de_np_DF3$DOY == 1, "NL"]/de_np_DF3[de_np_DF3$YEAR == i & de_np_DF3$DOY == 1, "PL"]
     
+    # NEP
+    nepDF[gppDF$Year == i, "gday_n_amb"] <- sum(de_n_DF2[de_n_DF2$YEAR == i, "NEP"], na.rm=T)
+    nepDF[gppDF$Year == i, "gday_p_amb"] <- sum(de_np_DF2[de_np_DF2$YEAR == i, "NEP"], na.rm=T)
+    nepDF[gppDF$Year == i, "gday_n_ele"] <- sum(de_n_DF3[de_n_DF3$YEAR == i, "NEP"], na.rm=T)
+    nepDF[gppDF$Year == i, "gday_p_ele"] <- sum(de_np_DF3[de_np_DF3$YEAR == i, "NEP"], na.rm=T)
+    
+    # SOil C
+    soilDF[leafDF$Year == i, "gday_n_amb"] <- de_n_DF2[de_n_DF2$YEAR == i & de_n_DF2$DOY == 1, "CL"]
+    soilDF[leafDF$Year == i, "gday_p_amb"] <- de_np_DF2[de_np_DF2$YEAR == i & de_np_DF2$DOY == 1, "CL"]
+    soilDF[leafDF$Year == i, "gday_n_ele"] <- de_n_DF3[de_n_DF3$YEAR == i & de_n_DF3$DOY == 1, "CL"]
+    soilDF[leafDF$Year == i, "gday_p_ele"] <- de_np_DF3[de_np_DF3$YEAR == i & de_np_DF3$DOY == 1, "CL"]
 }
 
 
