@@ -170,3 +170,35 @@ legend("top",
 
 dev.off()
 
+
+### Checking allocation 
+## Processing data
+allocDF_amb <- data.frame(seq(2012, 2023), NA, NA, NA)
+colnames(allocDF_amb) <- c("YEAR", "Aleaf", "Aroot", "Awood")
+allocDF_ele <- allocDF_amb
+allocDF_amb$Aleaf <- de_np_DF2$cpleaf/de_np_DF2$npp*100
+allocDF_amb$Awood <- de_np_DF2$cpstem/de_np_DF2$npp*100
+allocDF_amb$Aroot <- de_np_DF2$cproot/de_np_DF2$npp*100
+
+allocDF_ele$Aleaf <- aDF10$CGL/aDF10$NPP*100
+allocDF_ele$Awood <- aDF10$CGW/aDF10$NPP*100
+allocDF_ele$Aroot <- aDF10$CGFR/aDF10$NPP*100
+
+allocDF <- allocDF_amb
+allocDF$Aleaf <- (allocDF_ele$Aleaf - allocDF_amb$Aleaf)/allocDF_amb$Aleaf * 100
+allocDF$Awood <- (allocDF_ele$Awood - allocDF_amb$Awood)/allocDF_amb$Awood * 100
+allocDF$Aroot <- (allocDF_ele$Aroot - allocDF_amb$Aroot)/allocDF_amb$Aroot * 100
+
+
+with(allocDF_amb, plot(Aleaf~YEAR, type="l", ylim=c(0, 100), col = "black", lwd = 1.5))
+with(allocDF_amb, points(Awood~YEAR, type="l", col = "red", lwd = 1.5))
+with(allocDF_amb, points(Aroot~YEAR, type="l", col = "blue", lwd = 1.5))
+with(allocDF_amb, points(Aleaf+Awood+Aroot~YEAR, type="l", col = "purple", lwd = 2.5))
+
+
+with(allocDF, plot(Aleaf~YEAR, type="l", ylim=c(-10, 20), col = "black", lwd = 1.5,
+                   ylab = "Allocation response to eCO2 [%]"))
+with(allocDF, points(Awood~YEAR, type="l", col = "red", lwd = 1.5))
+with(allocDF, points(Aroot~YEAR, type="l", col = "blue", lwd = 1.5))
+legend("topright", c("Leaf", "Wood", "Root"), col=c("black", "red", "blue"),
+       lwd = 1.0)
