@@ -866,17 +866,6 @@ void calculate_jmax_and_vcmax(control *c, params *p, state *s, double Tk,
         *jmax = p->jmax;
         *vcmax = p->vcmax;
     } else if (c->modeljm == 1) {
-//        /* the maximum rate of electron transport at 25 degC */
-//        jmax25 = p->jmaxna * N0 + p->jmaxnb;
-//
-//        /* this response is well-behaved for TLEAF < 0.0 */
-//        *jmax = peaked_arrh(mt, jmax25, p->eaj, Tk,
-//                            p->delsj, p->edj);
-//
-//        /* the maximum rate of electron transport at 25 degC */
-//        vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;
-//
-//        *vcmax = arrh(mt, vcmax25, p->eav, Tk);
 
         /* current unit for sla: m2 kg-1; convert into m2 g-1 for Walker relationship */
         if (c->aci_relationship == WALKER) {
