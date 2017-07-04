@@ -226,13 +226,13 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, AMB_AVG=True, ELE_
                         "passpcmin": "0.005",
                         "passpcmax": "0.05",
                         "psecmnp": "0.000022",
-                        "pcbnew": "0.0003",
+                        "pcbnew": "0.0003",    # 0.0003
                         "pcbnewz": "0.0003",
                         "pccnew": "0.0003",
                         "pccnewz": "0.0003",
                         "pcmaxfold": "0.02",    # 0.0015 Table 3, Olander et al. 2005, Earth Interactions.
                         "pcmaxfyoung": "0.02",
-                        "pcmaxr": "0.0006",
+                        "pcmaxr": "0.02",     # 0.0006
                         "pcrfac": "0.8",
                         "pcwimm": "0.00014",
                         "pcwimmz": "0.00014",
