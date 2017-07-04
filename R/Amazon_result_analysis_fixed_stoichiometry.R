@@ -84,7 +84,7 @@ soilDF[,"gday_p"] <- (soilDF[,"gday_p_ele"] - soilDF[,"gday_p_amb"])/soilDF[,"gd
 
 
 
-pdf("R/amazon_workshop_co2_effect_amazon_fixed_stoichiometry.pdf", width = 9, height = 9)
+pdf("R/UK_workshop_co2_effect_amazon.pdf", width = 9, height = 9)
 m <- matrix(c(1,2,3,4,5,5),nrow = 3, ncol = 2, byrow = TRUE)
 
 layout(mat = m,heights = c(0.4,0.4,0.2))

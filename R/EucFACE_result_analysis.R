@@ -5,12 +5,18 @@
 
 ### Read in files
 ## DE relationship, N only
-de_n_DF2 <- read.csv("outputs/EUC_amb_avg_02_ellsworth_N.csv", skip=1)
-de_n_DF3 <- read.csv("outputs/EUC_ele_avg_03_ellsworth_N.csv", skip=1)
+#de_n_DF2 <- read.csv("outputs/EUC_amb_avg_02_ellsworth_N.csv", skip=1)
+#de_n_DF3 <- read.csv("outputs/EUC_ele_avg_03_ellsworth_N.csv", skip=1)
+
+de_n_DF2 <- read.csv("outputs/EUC_amb_avg_02_walker_N.csv", skip=1)
+de_n_DF3 <- read.csv("outputs/EUC_ele_avg_03_walker_N.csv", skip=1)
 
 ## DE relationship, N P 
-de_np_DF2 <- read.csv("outputs/EUC_amb_avg_02_ellsworth_NP.csv", skip=1)
-de_np_DF3 <- read.csv("outputs/EUC_ele_avg_03_ellsworth_NP.csv", skip=1)
+#de_np_DF2 <- read.csv("outputs/EUC_amb_avg_02_ellsworth_NP.csv", skip=1)
+#de_np_DF3 <- read.csv("outputs/EUC_ele_avg_03_ellsworth_NP.csv", skip=1)
+
+de_np_DF2 <- read.csv("outputs/EUC_amb_avg_02_walker_NP.csv", skip=1)
+de_np_DF3 <- read.csv("outputs/EUC_ele_avg_03_walker_NP.csv", skip=1)
 
 
 #### Process the data to plot annual patterns
@@ -20,6 +26,7 @@ colnames(gppDF) <- c("Year", "gday_n_amb","gday_p_amb", "gday_n_ele", "gday_p_el
 laiDF <- gppDF
 nepDF <- gppDF
 soilDF <- gppDF
+nppDF <- gppDF
 
 ## store data
 for (i in 2012:2023) {
@@ -28,6 +35,12 @@ for (i in 2012:2023) {
     gppDF[gppDF$Year == i, "gday_p_amb"] <- sum(de_np_DF2[de_np_DF2$year == i, "gpp"], na.rm=T)
     gppDF[gppDF$Year == i, "gday_n_ele"] <- sum(de_n_DF3[de_n_DF3$year == i, "gpp"], na.rm=T)
     gppDF[gppDF$Year == i, "gday_p_ele"] <- sum(de_np_DF3[de_np_DF3$year == i, "gpp"], na.rm=T)
+    
+    # NPP
+    nppDF[nppDF$Year == i, "gday_n_amb"] <- sum(de_n_DF2[de_n_DF2$year == i, "npp"], na.rm=T)
+    nppDF[nppDF$Year == i, "gday_p_amb"] <- sum(de_np_DF2[de_np_DF2$year == i, "npp"], na.rm=T)
+    nppDF[nppDF$Year == i, "gday_n_ele"] <- sum(de_n_DF3[de_n_DF3$year == i, "npp"], na.rm=T)
+    nppDF[nppDF$Year == i, "gday_p_ele"] <- sum(de_np_DF3[de_np_DF3$year == i, "npp"], na.rm=T)
 
     # LAI
     laiDF[laiDF$Year == i, "gday_n_amb"] <- de_n_DF2[de_n_DF2$year == i & de_n_DF2$doy == 1, "lai"]
@@ -53,12 +66,14 @@ for (i in 2012:2023) {
 
 # Compute CO2 % response
 gppDF[,"gday_n"] <- (gppDF[,"gday_n_ele"] - gppDF[,"gday_n_amb"])/gppDF[,"gday_n_amb"] * 100.0
+nppDF[,"gday_n"] <- (nppDF[,"gday_n_ele"] - nppDF[,"gday_n_amb"])/nppDF[,"gday_n_amb"] * 100.0
 laiDF[,"gday_n"] <- (laiDF[,"gday_n_ele"] - laiDF[,"gday_n_amb"])/laiDF[,"gday_n_amb"] * 100.0
 nepDF[,"gday_n"] <- (nepDF[,"gday_n_ele"] - nepDF[,"gday_n_amb"])
 soilDF[,"gday_n"] <- (soilDF[,"gday_n_ele"] - soilDF[,"gday_n_amb"])/soilDF[,"gday_n_amb"] * 100.0
 
 
 gppDF[,"gday_p"] <- (gppDF[,"gday_p_ele"] - gppDF[,"gday_p_amb"])/gppDF[,"gday_p_amb"] * 100.0
+nppDF[,"gday_p"] <- (nppDF[,"gday_p_ele"] - nppDF[,"gday_p_amb"])/nppDF[,"gday_p_amb"] * 100.0
 laiDF[,"gday_p"] <- (laiDF[,"gday_p_ele"] - laiDF[,"gday_p_amb"])/laiDF[,"gday_p_amb"] * 100.0
 nepDF[,"gday_p"] <- (nepDF[,"gday_p_ele"] - nepDF[,"gday_p_amb"])
 soilDF[,"gday_p"] <- (soilDF[,"gday_p_ele"] - soilDF[,"gday_p_amb"])/soilDF[,"gday_p_amb"] * 100.0
@@ -72,11 +87,11 @@ layout(mat = m,heights = c(0.4,0.4,0.2))
 par(mar=c(5.1, 6.1, 3.1, 6.1),
     mgp=c(4,1,0))
 
-# GPP
-with(gppDF, plot(gday_n~Year, ylim=c(-10,30), 
-                 ylab = "GPP % response",cex.axis = 1.5,
+# NPP
+with(nppDF, plot(gday_n~Year, ylim=c(-10,30), 
+                 ylab = "NPP % response",cex.axis = 1.5,
                  type="b", lwd = 3, col = "green", cex.lab = 2.5))
-with(gppDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
+with(nppDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
 x<-par("usr")
 rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
 grid(lty=6, col="white")
@@ -91,7 +106,7 @@ rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
 grid(lty=6, col="white")
 
 # NEP
-with(nepDF, plot(gday_n*100~Year, ylim=c(-100,500), 
+with(nepDF, plot(gday_n*100~Year, ylim=c(-200,500), 
                   ylab = expression(paste("NEP response [g ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
                   type="b", lwd = 3, col = "green", cex.lab = 2))
 with(nepDF, points(gday_p*100~Year, type="b", col = "red", lwd = 3))
@@ -126,11 +141,11 @@ layout(mat = m,heights = c(0.4,0.4,0.2))
 par(mar=c(5.1, 6.1, 3.1, 6.1),
     mgp=c(3,1,0))
 
-# GPP
-with(gppDF, plot(gday_n_ele/10~Year, ylim=c(0,5), 
-                 ylab = expression(paste("GPP [kg ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
+# NPP
+with(nppDF, plot(gday_n_ele/10~Year, ylim=c(0,4), 
+                 ylab = expression(paste("NPP [kg ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
                  type="b", lwd = 3, col = "green", cex.lab = 2.5))
-with(gppDF, points(gday_p_ele/10~Year, type="b", col = "red", lwd = 3))
+with(nppDF, points(gday_p_ele/10~Year, type="b", col = "red", lwd = 3))
 x<-par("usr")
 rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
 grid(lty=6, col="white")
