@@ -11,6 +11,14 @@ de_n_DF3 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought/outputs/
 de_np_DF2 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought_p/outputs/AmaFACE1_D_GDA_AMB_1999_2023.csv", skip=3)
 de_np_DF3 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought_p/outputs/AmaFACE1_D_GDA_ELE_1999_2023.csv", skip=3)
 
+## DE relationship, N only
+#de_n_DF2 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought/outputs/AmaFACE1_D_GDA_AMB_OBS.csv", skip=3)
+#de_n_DF3 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought/outputs/AmaFACE1_D_GDA_ELE_OBS.csv", skip=3)
+
+## DE relationship, N P 
+#de_np_DF2 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought_p/outputs/AmaFACE1_D_GDP_AMB_OBS.csv", skip=3)
+#de_np_DF3 <- read.csv("~/Documents/Research/Projects/Amazon/AMAZ/drought_p/outputs/AmaFACE1_D_GDP_ELE_OBS.csv", skip=3)
+
 
 #### Process the data to plot annual patterns
 ## Generate output DF at annual timestep
@@ -112,7 +120,7 @@ rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
 grid(lty=6, col="white")
 
 # NEP
-with(nepDF, plot(gday_n~Year, ylim=c(-100,500), 
+with(nepDF, plot(gday_n~Year, ylim=c(-500,500), 
                  ylab = expression(paste("NEP response [g ", m^-2, " ", yr^-1, "]")),cex.axis = 1.5,
                  type="b", lwd = 3, col = "green", cex.lab = 2))
 with(nepDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
@@ -121,7 +129,7 @@ rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
 grid(lty=6, col="white")
 
 # Soil C
-with(soilDF, plot(gday_n~Year, ylim=c(-2,2), 
+with(soilDF, plot(gday_n~Year, ylim=c(-2,6), 
                   ylab = "Soil C % response",cex.axis = 1.5,
                   type="b", lwd = 3, col = "green", cex.lab = 2.5))
 with(soilDF, points(gday_p~Year, type="b", col = "red", lwd = 3))
@@ -175,7 +183,7 @@ rect(x[1],x[3],x[2],x[4],col=adjustcolor("lightgray", 0.2))
 grid(lty=6, col="white")
 
 # Soil C
-with(soilDF, plot(gday_n_ele/1000~Year, ylim=c(0,12), 
+with(soilDF, plot(gday_n_ele/1000~Year, ylim=c(0,26), 
                   ylab = expression(paste("Soil C [kg ", m^-2, "]")),cex.axis = 1.5,
                   type="b", lwd = 3, col = "green", cex.lab = 2.5))
 with(soilDF, points(gday_p_ele/1000~Year, type="b", col = "red", lwd = 3))
