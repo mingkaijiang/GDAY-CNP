@@ -68,3 +68,6 @@ simulations/*.txt
 
 # pdf
 R/*.pdf
+
+# cfg
+*params/.cfg
