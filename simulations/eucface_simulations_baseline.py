@@ -43,7 +43,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
         # effectively zero
         itag = "%s_%s_model_spinup" % (experiment_id, site)
         otag = "%s_%s_model_spunup" % (experiment_id, site)
-        mtag = "%s_met_data_amb_var_co2.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
         out_fn = itag + "_equilib.out"
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -61,11 +61,11 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         # Canopy height = 22 m average of 6 plots at UWS, site_description_stuff/EucFACE_Plot_Summary.doc
                         "activesoil": "0.001",
                         "activesoiln": "0.00004",
-                        "activesoilp": "0.000002",
-                        "age": "100.0",
+                        "activesoilp": "0.00004",
+                        "age": "0.0",
                         "branch": "0.001",
                         "branchn": "0.00004",
-                        "branchp": "0.000002",
+                        "branchp": "0.00004",
                         "cstore": "0.0",
                         "nstore": "0.0",
                         "pstore": "0.0",
@@ -83,36 +83,37 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "metabsurfp": "0.0",
                         "passivesoil": "0.001",
                         "passivesoiln": "0.0004",
-                        "passivesoilp": "0.000002",
+                        "passivesoilp": "0.0004",
                         "prev_sma": "1.0",
                         "root": "0.001",
                         "croot": "0.0",   # don't simulate coarse roots
                         "crootn": "0.0",  # don't simulate coarse roots
                         "crootp": "0.0",  # don't simulate coarse roots
                         "rootn": "0.00004",
-                        "rootp": "0.000002",
+                        "rootp": "0.00004",
                         "sapwood": "0.001",
                         "shoot": "0.001",
                         "shootn": "0.00004",
-                        "shootp": "0.000002",
+                        "shootp": "0.00004",
                         "slowsoil": "0.001",
                         "slowsoiln": "0.00004",
-                        "slowsoilp": "0.000002",
+                        "slowsoilp": "0.00004",
                         "stem": "0.001",
                         "stemn": "0.00004",
-                        "stemp": "0.000002",
+                        "stemp": "0.00004",
                         "stemnimm": "0.00004",
-                        "stempimm": "0.000002",
+                        "stempimm": "0.00004",
                         "stemnmob": "0.0",
                         "stempmob": "0.0",
                         "structsoil": "0.001",
                         "structsoiln": "0.00004",
-                        "structsoilp": "0.000002",
+                        "structsoilp": "0.00004",
                         "structsurf": "0.001",
                         "structsurfn": "0.00004",
-                        "structsurfp": "0.0000024",
+                        "structsurfp": "0.00004",
 
                         # parameters
+                        "prescribed_leaf_NC": "0.035", #aCO2 = 0.035, eCO2 = xx
                         "resp_coeff": "0.2",      
                         "alpha_j": "0.308",  # Taking the theoretical maximum (from Belinda) 0.385 x 0.8 (leaf absorptance) = 0.308
                         "intercep_frac": "0.15",
@@ -120,13 +121,13 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "latitude": "-33.61",
                         "albedo": "0.2",
                         "finesoil": "0.2",   # silt + clay fraction. Surface soil texture (upper 45 cm) for Clarenden sand: 80 +/- 8% sand, 9 +/- 5% silt, 11 +/- 3% clay
-                        "slamax": "5.1",    # current unit: m2 kg-1; original unit: 43.7 +/- 1.5 cm2 g 1 dry mass
-                        "sla": "5.1",       # current unit: m-2 kg-1; original unit: 43.7 +/-  1.5 cm2 g 1 dry mass
-                        "slazero": "5.1",   # current unit: m-2 kg-1; original unit: 43.7+/-  1.5 cm2 g 1 dry mass
+                        "slamax": "4.0",    # 43.7 +/- 1.5 cm2 g 1 dry mass
+                        "sla": "4.0",       # 43.7 +/-  1.5 cm2 g 1 dry mass
+                        "slazero": "4.0",   # 43.7+/-  1.5 cm2 g 1 dry mass
                         "lai_closed": "0.5",  # I am effectively turning this feature off by setting it so low
-                        "c_alloc_fmax": "0.45",  # 0.35
+                        "c_alloc_fmax": "0.35",  # 0.35
                         "c_alloc_fmin": "0.05",  # 0.15
-                        "c_alloc_rmax": "0.45",  # 0.35
+                        "c_alloc_rmax": "0.35",  # 0.35
                         "c_alloc_rmin": "0.05",  # 0.05
                         "c_alloc_bmax": "0.1",   # 0.1
                         "c_alloc_bmin": "0.1",   # 0.1
@@ -148,8 +149,8 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "nccnewz": "0.003",          #new coarse root N C at zero leaf N C
                         "nccnew": "0.003",           #new coarse root N C at critical leaf N C
                         "ncrfac": "0.8",
-                        "ncmaxfyoung": "0.04",
-                        "ncmaxfold": "0.04",
+                        "ncmaxfyoung": "0.1",
+                        "ncmaxfold": "0.1",
                         "ncmaxr": "0.03",
                         "retransmob": "0.0",
                         "fdecay": "0.6",    # 18 mth turnover * 1/30
@@ -157,15 +158,15 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "max_p_biochemical": "0.001",
                         "rdecay": "0.6",
                         "rdecaydry": "0.6",
-                        "crdecay": "0.00",           # turn off coarse roots!
-                        "bdecay": "0.1",            # no idea, assuming 50 years
-                        "wdecay": "0.1",            # no idea, assuming 50 years
+                        "crdecay": "0.00",  # turn off coarse roots!
+                        "bdecay": "0.02",  # no idea, assuming 50 years
+                        "wdecay": "0.02",  # no idea, assuming 50 years
                         "watdecaydry": "0.0",
                         "watdecaywet": "0.1",
-                        "ligshoot": "0.18",          # Based on white et al. 2000 #"0.145",   # assuming leaf and root same as DE word document
-                        "ligroot": "0.22",           # Based on white et al. 2000    # assuming leaf and root same as DE word document
-                        "rateuptake": "1.8",
-                        "rateloss": "0.05",           # was 0.1
+                        "ligshoot": "0.18", # Based on white et al. 2000 #"0.145",   # assuming leaf and root same as DE word document
+                        "ligroot": "0.22",  # Based on white et al. 2000    # assuming leaf and root same as DE word document
+                        "rateuptake": "1.0",
+                        "rateloss": "0.1",  # was 0.1
                         "topsoil_depth": "450.0",    # Not needed as I have supplied the root zone water and topsoil water available
                         "rooting_depth": "2500.0",   # Not needed as I have supplied the root zone water and topsoil water available
                         "wcapac_root": "300.0",      # [mm] (FC-WP)*rooting_depth. But using 2.0 m, site_description_stuff/EucFACE_Plot_Summary.doc
@@ -188,40 +189,32 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "displace_ratio": "0.75",  # From Jones, pg 67, following Jarvis et al. 1976
                         "z0h_z0m": "1.0",
 
-                        "g1": "3.8667",          # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
-                        #"jmaxna": "14.891",      # 
-                        #"jmaxpa": "291.4305",    # 
-                        #"jmaxnb": "99.497",      # 
-                        #"jmaxpb": "99.949",      # 88.56  
-                        #"vcmaxna": "10.453",     # 6.426
-                        #"vcmaxpa": "153.1748",    
-                        #"vcmaxnb": "74.522",     # 60.526
-                        #"vcmaxpb": "57.242",     # 27.66
-                        "jmaxna": "49.930",      # forcing intercept to zero; if use all species df, 49.743
-                        "jmaxpa": "933.90",      # forcing intercept to zero; if use all species df, 842.46 
-                        "jmaxnb": "0.0",         # forcing intercept to zero
-                        "jmaxpb": "0.0",         # forcing intercept to zero
-                        "vcmaxna": "27.707",     # forcing intercept to zero; if use all species df, 27.627
-                        "vcmaxpa": "516.83",     # forcing intercept to zero; if use all species df, 468.76
-                        "vcmaxnb": "0.0",        # forcing intercept to zero
-                        "vcmaxpb": "0.0",        # forcing intercept to zero
-                        "measurement_temp": "25.0", # parameters obtained at 22 not 25 degrees
+                        "g1": "3.8667",       # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
+                        "jmaxna": "31.5",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
+                        "jmaxpa": "2914.305",   # 400.99
+                        "jmaxnb": "0.0",     # at 22 deg c
+                        "jmaxpb": "99.949",   # 88.56  
+                        "vcmaxna": "6.6",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
+                        "vcmaxpa": "1531.748",    
+                        "vcmaxnb": "0.0",    # "vcmaxnb": "0.0",    # at 22 deg c
+                        "vcmaxpb": "57.242",  # 27.66
+                        "measurement_temp": "22.0", # parameters obtained at 22 not 25 degrees
                         "heighto": "4.826",
                         "htpower": "0.35",
                         "height0": "5.0",
                         "height1": "25.0",
-                        "leafsap0": "4000.0",     # "4000.0",
-                        "leafsap1": "2700.0",     # 2700
+                        "leafsap0": "4000.0", #"4000.0",
+                        "leafsap1": "2700.0", #2700
                         "branch0": "5.61",
                         "branch1": "0.346",
                         "croot0": "0.34",
                         "croot1": "0.84",
                         "targ_sens": "0.5",
-                        "density": "800.0",       # 480
-                        "nf_min": "0.005", 
+                        "density": "480.0",
+                        "nf_min": "0.005",
                         "nf_crit": "0.015",
                         "sapturnover": "0.1",
-                        "p_atm_deposition": "0.000086",   # 1/4 of value from Table 4, Olander et al. 2005; Earth Interactions.
+                        "p_atm_deposition": "0.00085",   # 1/4 of value from Table 4, Olander et al. 2005; Earth Interactions.
                         "p_rate_par_weather": "0.0001", # Calcualted so that weathering rate = atm deposition;
                         "passpcmin": "0.005",
                         "passpcmax": "0.05",
@@ -250,7 +243,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "pmin0": "0.0",
                         "pmincrit": "2.0",
                         "prateloss": "0.05",
-                        "prateuptake": "3.6",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
+                        "prateuptake": "7.0",    # Fitted value to obtain balance between uptake N:P ratio and reasonable P labile pool
                         "slowpcmin": "0.005",
                         "slowpcmax": "0.011111",
                         "soilph": "4.5",          # Olander et al., 2005, Earth Interactions.
@@ -269,14 +262,14 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "exudation": "false",
                         "fixed_stem_nc": "true",
                         "fixed_stem_pc": "true",
-                        "fixleafnc": "false",
-                        "fixleafpc": "false",
+                        "fixleafnc": "true",
+                        "fixleafpc": "true",
                         "grazing": "false",
                         "gs_model": "medlyn",
                         "aci_relationship": "baseline",
                         "model_optroot": "false",
                         "modeljm": "1",
-                        "ncycle": "true",
+                        "ncycle": "false",
                         "pcycle": "false",
                         "nuptake_model": "1",
                         "puptake_model": "1",
@@ -291,7 +284,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "sw_stress_model": "1",  # Sands and Landsberg
                         "use_eff_nc": "0",
                         "text_effect_p": "1",
-                        "water_stress": "true",
+                        "water_stress": "false",
 
         }
         ad.adjust_param_file(cfg_fname, replace_dict)
@@ -306,7 +299,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
-        mtag = "%s_met_data_amb_var_co2.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
         out_fn = "%s_amb_equilib.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -334,7 +327,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
-        mtag = "%s_met_data_amb_var_co2.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
         out_fn = "%s_amb_equilib.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -363,7 +356,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_indust_adj" % (experiment_id, site)
         otag = "%s_%s_model_ele_initial" % (experiment_id, site)
-        mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
+        mtag = "%s_met_data_%s_avg_co2_fixed.csv" % (site, treatment)
         out_fn = "%s_ele_initial.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -375,7 +368,10 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                          "cfg_fname": "%s" % (cfg_fname),
                          "met_fname": "%s" % (met_fname),
                          "out_fname": "%s" % (out_fname),
-    
+
+                         # parameters   
+                         "prescribed_leaf_NC": "0.03", #aCO2 = 0.035, eCO2 = xx
+ 
                          # control
                          "print_options": "daily",
     
@@ -392,7 +388,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_indust_adj" % (experiment_id, site)
         otag = "%s_%s_model_ele_initial" % (experiment_id, site)
-        mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
+        mtag = "%s_met_data_%s_avg_co2_fixed.csv" % (site, treatment)
         out_fn = "%s_ele_initial.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -404,6 +400,9 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                          "cfg_fname": "%s" % (cfg_fname),
                          "met_fname": "%s" % (met_fname),
                          "out_fname": "%s" % (out_fname),
+
+                         # parameters
+                         "prescribed_leaf_NC": "0.03", #aCO2 = 0.035, eCO2 = xx
     
                          # control
                          "print_options": "end",
@@ -421,7 +420,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_ele_spinup" % (experiment_id, site)
         otag = "%s_%s_model_ele_spunup" % (experiment_id, site)
-        mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
+        mtag = "%s_met_data_%s_avg_co2_fixed.csv" % (site, treatment)
         out_fn = "FACE_EUC_ele_spunup_%s%s.csv" % (site, treatment.upper())
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -433,6 +432,9 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                          "cfg_fname": "%s" % (cfg_fname),
                          "met_fname": "%s" % (met_fname),
                          "out_fname": "%s" % (out_fname),
+
+                         # parameters
+                         "prescribed_leaf_NC": "0.03", #aCO2 = 0.035, eCO2 = xx
     
                          # control
                          "print_options": "end",
@@ -450,7 +452,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_ele_equil" % (experiment_id, site)
         otag = "%s_%s_model_ele_final" % (experiment_id, site)
-        mtag = "%s_met_data_%s_var_co2.csv" % (site, treatment)
+        mtag = "%s_met_data_%s_avg_co2_fixed.csv" % (site, treatment)
         out_fn = "%s_ele_final_equilib.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -462,6 +464,9 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                          "cfg_fname": "%s" % (cfg_fname),
                          "met_fname": "%s" % (met_fname),
                          "out_fname": "%s" % (out_fname),
+
+                         # parameters
+                         "prescribed_leaf_NC": "0.03", #aCO2 = 0.035, eCO2 = xx
     
                          # control
                          "print_options": "daily",

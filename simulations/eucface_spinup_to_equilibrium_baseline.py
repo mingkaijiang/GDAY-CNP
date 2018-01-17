@@ -45,7 +45,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
         # effectively zero
         itag = "%s_%s_model_spinup" % (experiment_id, site)
         otag = "%s_%s_model_spunup" % (experiment_id, site)
-        mtag = "%s_met_data_amb_var_co2.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
         out_fn = itag + "_equilib.out"
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -115,6 +115,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "structsurfp": "0.00004",
 
                         # parameters
+                        "prescribed_leaf_NC": "0.035", #aCO2 = 0.035, eCO2 = xx
                         "resp_coeff": "0.2",      
                         "alpha_j": "0.308",  # Taking the theoretical maximum (from Belinda) 0.385 x 0.8 (leaf absorptance) = 0.308
                         "intercep_frac": "0.15",
@@ -126,12 +127,12 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "sla": "4.0",       # 43.7 +/-  1.5 cm2 g 1 dry mass
                         "slazero": "4.0",   # 43.7+/-  1.5 cm2 g 1 dry mass
                         "lai_closed": "0.5",  # I am effectively turning this feature off by setting it so low
-                        "c_alloc_fmax": "0.25",  # 0.35
+                        "c_alloc_fmax": "0.35",  # 0.35
                         "c_alloc_fmin": "0.05",  # 0.15
-                        "c_alloc_rmax": "0.25",  # 0.35
+                        "c_alloc_rmax": "0.35",  # 0.35
                         "c_alloc_rmin": "0.05",  # 0.05
-                        "c_alloc_bmax": "0.05",   # 0.1
-                        "c_alloc_bmin": "0.05",   # 0.1
+                        "c_alloc_bmax": "0.1",   # 0.1
+                        "c_alloc_bmin": "0.1",   # 0.1
                         "c_alloc_cmax": "0.0", # turn off coarse roots!
                         "biochemical_p_constant": "150.0",
                         "fretrans": "0.5",
@@ -167,7 +168,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "ligshoot": "0.18", # Based on white et al. 2000 #"0.145",   # assuming leaf and root same as DE word document
                         "ligroot": "0.22",  # Based on white et al. 2000    # assuming leaf and root same as DE word document
                         "rateuptake": "1.0",
-                        "rateloss": "0.05",  # was 0.1
+                        "rateloss": "0.1",  # was 0.1
                         "topsoil_depth": "450.0",    # Not needed as I have supplied the root zone water and topsoil water available
                         "rooting_depth": "2500.0",   # Not needed as I have supplied the root zone water and topsoil water available
                         "wcapac_root": "300.0",      # [mm] (FC-WP)*rooting_depth. But using 2.0 m, site_description_stuff/EucFACE_Plot_Summary.doc
@@ -191,13 +192,13 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "z0h_z0m": "1.0",
 
                         "g1": "3.8667",       # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
-                        "jmaxna": "236.064",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
+                        "jmaxna": "31.5",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
                         "jmaxpa": "2914.305",   # 400.99
-                        "jmaxnb": "129.785",     # at 22 deg c
+                        "jmaxnb": "0.0",     # at 22 deg c
                         "jmaxpb": "99.949",   # 88.56  
-                        "vcmaxna": "104.5338",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
+                        "vcmaxna": "6.6",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
                         "vcmaxpa": "1531.748",    
-                        "vcmaxnb": "74.5224",    # "vcmaxnb": "0.0",    # at 22 deg c
+                        "vcmaxnb": "0.0",    # "vcmaxnb": "0.0",    # at 22 deg c
                         "vcmaxpb": "57.242",  # 27.66
                         "measurement_temp": "22.0", # parameters obtained at 22 not 25 degrees
                         "heighto": "4.826",
@@ -255,7 +256,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
 
                         # control
                         "adjust_rtslow": "false",  # priming, off
-                        "alloc_model": "fixed",
+                        "alloc_model": "allometric",
                         "assim_model": "mate",
                         "calc_sw_params": "true",   #false=use fwp values, true=derive them
                         "deciduous_model": "false",
@@ -263,14 +264,14 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "exudation": "false",
                         "fixed_stem_nc": "true",
                         "fixed_stem_pc": "true",
-                        "fixleafnc": "false",
-                        "fixleafpc": "false",
+                        "fixleafnc": "true",
+                        "fixleafpc": "true",
                         "grazing": "false",
                         "gs_model": "medlyn",
                         "aci_relationship": "baseline",
                         "model_optroot": "false",
                         "modeljm": "1",
-                        "ncycle": "true",
+                        "ncycle": "false",
                         "pcycle": "false",
                         "nuptake_model": "1",
                         "puptake_model": "1",
@@ -285,7 +286,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "sw_stress_model": "1",  # Sands and Landsberg
                         "use_eff_nc": "0",
                         "text_effect_p": "1",
-                        "water_stress": "true",
+                        "water_stress": "false",
 
         }
         ad.adjust_param_file(cfg_fname, replace_dict)
@@ -300,7 +301,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
 
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
-        mtag = "%s_met_data_amb_var_co2.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
         out_fn = "%s_amb_equilib.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")

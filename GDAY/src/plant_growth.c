@@ -210,6 +210,7 @@ void carbon_daily_production(control *c, fluxes *f, met_arrays *ma, met *m, para
     if (s->lai > 0.0) {
         /* average leaf nitrogen content (g N m-2 leaf) */
         leafn = (s->shootnc * p->cfracts / p->sla * KG_AS_G);
+        //leafn = (0.035 * p->cfracts / p->sla * KG_AS_G);
         /* average leaf phosphorus content (g P m-2 leaf) */
         leafp = (s->shootpc * p->cfracts / p->sla * KG_AS_G);
 
