@@ -480,6 +480,9 @@ int handler(char *section, char *name, char *value, control *c,
         else if (strcmp(temp, "ELLSWORTH") == 0||
                  strcmp(temp, "ellsworth") == 0)
             c->aci_relationship = ELLSWORTH;
+        else if (strcmp(temp, "BASELINE") == 0||
+                 strcmp(temp, "baseline") == 0)
+            c->aci_relationship = BASELINE;
         else {
             fprintf(stderr, "Unknown A-Ci relationship: %s\n", temp);
             exit(EXIT_FAILURE);

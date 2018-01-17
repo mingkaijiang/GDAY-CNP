@@ -871,14 +871,16 @@ void calculate_jmax_and_vcmax(control *c, params *p, state *s, double Tk,
         if (c->aci_relationship == WALKER) {
             log_vcmax = 1.993 + 2.555 * log(N0) - 0.372 * log(p->sla/1000.0) + 0.422 * log(N0) * log(p->sla/1000.0);
             vcmax25 = exp(log_vcmax);
-            
             log_jmax = 1.197 + 0.847 * log_vcmax;
             jmax25 = exp(log_jmax);
         } else if (c->aci_relationship == ELLSWORTH) {
-            
             jmax25 = p->jmaxna * N0 + p->jmaxnb;
-            
             vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;
+            
+        } else if (c->aci_relationship == BASELINE) {
+            jmax25 = p->jmaxna * N0 + p->jmaxnb;
+            vcmax25 = p->vcmaxna * N0 + p->vcmaxnb;
+            
         }
 
         
@@ -978,11 +980,6 @@ void calculate_jmax_and_vcmax_with_p(control *c, params *p, state *s, double Tk,
         vcmax25n =  p->vcmaxna * N0 + p->vcmaxnb;
         vcmax25p = p->vcmaxpa * P0 + p->vcmaxpb;
         vcmax25 = MIN(vcmax25n, vcmax25p);
-        
-        
-        //fprintf(stderr, "N0 %f, P0 %f, jmax25n %f, jmax25p %f, vcmax25n %f, vcmax25p %f\n",
-        //        N0, P0, jmax25n, jmax25p, vcmax25n, vcmax25p);
-        
     }
 
     
