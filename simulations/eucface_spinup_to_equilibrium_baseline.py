@@ -192,7 +192,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "z0h_z0m": "1.0",
 
                         "g1": "3.8667",       # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
-                        "jmaxna": "22.5",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
+                        "jmaxna": "30.5",     # 22.5   "jmaxna": "133.35",  # at 22 deg c
                         "jmaxpa": "0.0",   # 400.99
                         "jmaxnb": "0.0",     # at 22 deg c
                         "jmaxpb": "0.0",   # 88.56  
