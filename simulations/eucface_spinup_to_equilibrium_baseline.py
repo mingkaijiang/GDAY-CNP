@@ -45,7 +45,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
         # effectively zero
         itag = "%s_%s_model_spinup" % (experiment_id, site)
         otag = "%s_%s_model_spunup" % (experiment_id, site)
-        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2.csv" % (site)
         out_fn = itag + "_equilib.out"
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -192,14 +192,14 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "z0h_z0m": "1.0",
 
                         "g1": "3.8667",       # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
-                        "jmaxna": "31.5",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
-                        "jmaxpa": "2914.305",   # 400.99
+                        "jmaxna": "22.5",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
+                        "jmaxpa": "0.0",   # 400.99
                         "jmaxnb": "0.0",     # at 22 deg c
-                        "jmaxpb": "99.949",   # 88.56  
-                        "vcmaxna": "6.6",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
-                        "vcmaxpa": "1531.748",    
+                        "jmaxpb": "0.0",   # 88.56  
+                        "vcmaxna": "12.0",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
+                        "vcmaxpa": "0.0",    
                         "vcmaxnb": "0.0",    # "vcmaxnb": "0.0",    # at 22 deg c
-                        "vcmaxpb": "57.242",  # 27.66
+                        "vcmaxpb": "0.0",  # 27.66
                         "measurement_temp": "22.0", # parameters obtained at 22 not 25 degrees
                         "heighto": "4.826",
                         "htpower": "0.35",
@@ -253,6 +253,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "sorpaf": "1.0",
                         "structcp": "5500.0",
                         "structratp": "0.0",
+                        "fix_lai": "1.2",
 
                         # control
                         "adjust_rtslow": "false",  # priming, off
@@ -266,6 +267,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
                         "fixed_stem_pc": "true",
                         "fixleafnc": "true",
                         "fixleafpc": "true",
+                        "fixed_lai": "true",
                         "grazing": "false",
                         "gs_model": "medlyn",
                         "aci_relationship": "baseline",
@@ -301,7 +303,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
 
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
-        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2.csv" % (site)
         out_fn = "%s_amb_equilib.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")

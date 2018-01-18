@@ -43,7 +43,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
         # effectively zero
         itag = "%s_%s_model_spinup" % (experiment_id, site)
         otag = "%s_%s_model_spunup" % (experiment_id, site)
-        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2.csv" % (site)
         out_fn = itag + "_equilib.out"
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -190,11 +190,11 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "z0h_z0m": "1.0",
 
                         "g1": "3.8667",       # 3.8667 Fit by Me to Teresa's data 7th Nov 2013; or 2.78 from stomatal model
-                        "jmaxna": "31.5",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
+                        "jmaxna": "22.5",     # 31.5 "jmaxna": "133.35",  # at 22 deg c
                         "jmaxpa": "2914.305",   # 400.99
                         "jmaxnb": "0.0",     # at 22 deg c
                         "jmaxpb": "99.949",   # 88.56  
-                        "vcmaxna": "6.6",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
+                        "vcmaxna": "12.0",   # 15.6 "vcmaxna": "66.04",  # at 22 deg c
                         "vcmaxpa": "1531.748",    
                         "vcmaxnb": "0.0",    # "vcmaxnb": "0.0",    # at 22 deg c
                         "vcmaxpb": "57.242",  # 27.66
@@ -251,6 +251,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "sorpaf": "1.0",
                         "structcp": "5500.0",
                         "structratp": "0.0",
+                        "fix_lai": "1.2",
 
                         # control
                         "adjust_rtslow": "false",  # priming, off
@@ -264,6 +265,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                         "fixed_stem_pc": "true",
                         "fixleafnc": "true",
                         "fixleafpc": "true",
+                        "fixed_lai": "true",
                         "grazing": "false",
                         "gs_model": "medlyn",
                         "aci_relationship": "baseline",
@@ -299,7 +301,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
-        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2.csv" % (site)
         out_fn = "%s_amb_equilib.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -327,7 +329,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_spunup_adj" % (experiment_id, site)
         otag = "%s_%s_model_indust" % (experiment_id, site)
-        mtag = "%s_met_data_amb_avg_co2_fixed.csv" % (site)
+        mtag = "%s_met_data_amb_avg_co2.csv" % (site)
         out_fn = "%s_amb_equilib.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -356,7 +358,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_indust_adj" % (experiment_id, site)
         otag = "%s_%s_model_ele_initial" % (experiment_id, site)
-        mtag = "%s_met_data_%s_avg_co2_fixed.csv" % (site, treatment)
+        mtag = "%s_met_data_%s_avg_co2.csv" % (site, treatment)
         out_fn = "%s_ele_initial.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -370,7 +372,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                          "out_fname": "%s" % (out_fname),
 
                          # parameters   
-                         "prescribed_leaf_NC": "0.03", #aCO2 = 0.035, eCO2 = xx
+                         "prescribed_leaf_NC": "0.035", #aCO2 = 0.035, eCO2 = xx
  
                          # control
                          "print_options": "daily",
@@ -388,7 +390,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_indust_adj" % (experiment_id, site)
         otag = "%s_%s_model_ele_initial" % (experiment_id, site)
-        mtag = "%s_met_data_%s_avg_co2_fixed.csv" % (site, treatment)
+        mtag = "%s_met_data_%s_avg_co2.csv" % (site, treatment)
         out_fn = "%s_ele_initial.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -402,7 +404,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                          "out_fname": "%s" % (out_fname),
 
                          # parameters
-                         "prescribed_leaf_NC": "0.03", #aCO2 = 0.035, eCO2 = xx
+                         "prescribed_leaf_NC": "0.035", #aCO2 = 0.035, eCO2 = xx
     
                          # control
                          "print_options": "end",
@@ -420,7 +422,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_ele_spinup" % (experiment_id, site)
         otag = "%s_%s_model_ele_spunup" % (experiment_id, site)
-        mtag = "%s_met_data_%s_avg_co2_fixed.csv" % (site, treatment)
+        mtag = "%s_met_data_%s_avg_co2.csv" % (site, treatment)
         out_fn = "FACE_EUC_ele_spunup_%s%s.csv" % (site, treatment.upper())
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -434,7 +436,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                          "out_fname": "%s" % (out_fname),
 
                          # parameters
-                         "prescribed_leaf_NC": "0.03", #aCO2 = 0.035, eCO2 = xx
+                         "prescribed_leaf_NC": "0.035", #aCO2 = 0.035, eCO2 = xx
     
                          # control
                          "print_options": "end",
@@ -452,7 +454,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
 
         itag = "%s_%s_model_ele_equil" % (experiment_id, site)
         otag = "%s_%s_model_ele_final" % (experiment_id, site)
-        mtag = "%s_met_data_%s_avg_co2_fixed.csv" % (site, treatment)
+        mtag = "%s_met_data_%s_avg_co2.csv" % (site, treatment)
         out_fn = "%s_ele_final_equilib.csv" % (site)
         out_param_fname = os.path.join(param_dir, otag + ".cfg")
         cfg_fname = os.path.join(param_dir, itag + ".cfg")
@@ -466,7 +468,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True, ELE_INITIALIZATION
                          "out_fname": "%s" % (out_fname),
 
                          # parameters
-                         "prescribed_leaf_NC": "0.03", #aCO2 = 0.035, eCO2 = xx
+                         "prescribed_leaf_NC": "0.035", #aCO2 = 0.035, eCO2 = xx
     
                          # control
                          "print_options": "daily",
