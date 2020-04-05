@@ -10,6 +10,10 @@ GDAY-CNP uses a modified version of the [CENTURY](https://www.nrel.colostate.edu
 
 Fig. 1: Pools and fluxes of carbon (C), nitrogen (N) and phosphorus (P) in the GDAY-CNP model.
 
+
+## Structure of the Repository
+
+
 ## Installation
 To get the code your best route is probably to fork the repository, there is a nice [explanation on github](https://help.github.com/articles/fork-a-repo/).
 

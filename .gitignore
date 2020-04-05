@@ -40,7 +40,7 @@ outputs/*.csv
 outputs/*.nceas
 outputs/old/*.csv
 data/*.csv
-analyses/*.csv
+analysis/*.csv
 
 
 # All nc files
