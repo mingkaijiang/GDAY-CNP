@@ -13,12 +13,12 @@ import sys
 import subprocess
 
 USER = os.getlogin()
-sys.path.append('/Users/%s/Documents/Research/Projects/eucface/Git/scripts' % (USER))
+sys.path.append('/Users/%s/Documents/Research/Projects/EucFACE_Modeling/test/scripts' % (USER))
 import adjust_gday_param_file as ad
 
 
-__author__  = "Martin De Kauwe"
-__version__ = "1.0 (14.12.2014)"
+__author__  = "Mingkai Jiang"
+__version__ = "1.0 (06.04.2020)"
 __email__   = "mdekauwe@gmail.com"
 
 def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
@@ -28,7 +28,7 @@ def main(experiment_id, site, SPIN_UP=True, POST_INDUST=True):
 
     # dir names
     base_param_name = "base_start_with_P"
-    base_param_dir = "/Users/%s/Documents/Research/Projects/eucface/Git/GDAY/params" % (USER)
+    base_param_dir = "/Users/%s/Documents/Research/Projects/EucFACE_Modeling/test/GDAY/params" % (USER)
     base_dir = os.path.dirname(os.getcwd())
     param_dir = os.path.join(base_dir, "params")
     met_dir = os.path.join(base_dir, "met_data")
