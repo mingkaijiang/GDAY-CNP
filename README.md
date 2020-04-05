@@ -12,6 +12,25 @@ Fig. 1: Pools and fluxes of carbon (C), nitrogen (N) and phosphorus (P) in the G
 
 
 ## Structure of the Repository
+-- Folder **GDAY** contains four subfolders:
+
+- Subfolder **doc** contains key documents describing the model;
+
+- Subfolder **params** contains essential baseline parameter file to initiate the model;
+
+- Subfolder **scripts** contains essential wrapper scripts to initiate the model;
+
+- Subfolder **src** contains the GDAY code;
+
+-- Folder **analysis** contains analytical code to process the simulation results;
+
+-- Folder **met_data** contains meteorological input data and the code to generate met data;
+
+-- Folder **outputs** contains simulated output result;
+
+-- Folder **params** contains simulated parameters at each simulation timestep (e.g. spin-up, industrial, etc.);
+
+-- Folder **simulations** contains the python scripts and the gday executable to run the model.
 
 
 ## Installation
@@ -29,28 +48,28 @@ $ make clean ; make
 
 The Makefile will need to be edited by hand to set the $ARCH flag, which sets the installation path. Currently it is hardwired to my computer.
 
+After making the executable, a *gday* executable is generated in the subfolder **src**. You need to copy this executable and paste it to the folder **simulations**. Repeat this manual step whenever there is a code change.
+
+
 ## Running the model
-A simple model usage can be displayed by calling GDAY as follows:
-
-```bash
-$ gday -u
-```
-
 Presently, there are only two options which the user can set via the command line. All model options, including *all* of the model parameters are customisable via the parameter file.
 
-To spin-up GDAY:
+To spin-up GDAY with the spin-up python script:
 
 ```bash
-$ gday -s -p param_file.cfg
+$ python eucface_spinup_to_equilibrium.py
 ```
 
 To run GDAY:
 
 ```bash
-$ gday -p param_file.cfg
+$ python eucface_simulations.py
 ```
 
+Note that, in both the spinup and simulation python scripts, there are parameter and script file paths to be set manually. Also need to set parameter values, met data name and output data names, per your simulation purpose. 
+
 When the model is run it expects to find its "model state" (i.e. from a previous spin-up) in the parameter file. This state is automatically written the parameter file after the initial spin-up when the "print_options" flag has been set to "end", rather than "daily".
+
 
 
 ## Parameter file
